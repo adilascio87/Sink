@@ -1,0 +1,60 @@
+import type { Scenario } from '@/content/types'
+
+export const restaurante: Scenario = {
+  id: 'restaurante',
+  tier: 2,
+  cefr: 'A2',
+  title: 'En el restaurante',
+  goal: 'Get a table, order from the menu, ask for a recommendation, and get the bill.',
+  culture: 'Beyond the set "almuerzo", restaurants serve à la carte. "Seco de pollo" is a beloved Ecuadorian chicken stew (despite "seco" meaning "dry"). Ask "¿qué me recomienda?" — locals love to suggest.',
+  dialogue: [
+    { id: 're-1', speaker: 'them', es: 'Buenas noches, ¿mesa para cuántos?', en: 'Good evening, table for how many?' },
+    { id: 're-2', speaker: 'you', es: 'Para dos, por favor.', en: 'For two, please.' },
+    { id: 're-3', speaker: 'them', es: 'Aquí tienen el menú. ¿Algo de tomar?', en: 'Here\'s the menu. Something to drink?' },
+    { id: 're-4', speaker: 'you', es: 'Dos jugos de mora. ¿Qué me recomienda?', en: 'Two blackberry juices. What do you recommend?' },
+    { id: 're-5', speaker: 'them', es: 'El seco de pollo está muy bueno.', en: 'The chicken stew is very good.' },
+    { id: 're-6', speaker: 'you', es: 'Perfecto, dos secos de pollo.', en: 'Perfect, two chicken stews.' },
+    { id: 're-7', speaker: 'you', es: 'La cuenta, por favor.', en: 'The check, please.' },
+  ],
+  chunks: [
+    { id: 're-c1', es: 'mesa para dos', en: 'table for two' },
+    { id: 're-c2', es: '¿Algo de tomar?', en: 'Something to drink?' },
+    { id: 're-c3', es: '¿Qué me recomienda?', en: 'What do you recommend?' },
+    { id: 're-c4', es: 'La cuenta, por favor', en: 'The check, please' },
+    { id: 're-c5', es: 'está muy bueno', en: 'it\'s very good' },
+  ],
+  vocab: [
+    { id: 're-v1', es: 'la mesa', en: 'table', pos: 'n.' },
+    { id: 're-v2', es: 'el menú', en: 'menu', pos: 'n.' },
+    { id: 're-v3', es: 'tomar', en: 'to drink', pos: 'v.' },
+    { id: 're-v4', es: 'recomendar', en: 'to recommend', pos: 'v.' },
+    { id: 're-v5', es: 'el seco', en: 'stew (Ec.)', pos: 'n.' },
+    { id: 're-v6', es: 'la cuenta', en: 'the bill / check', pos: 'n.' },
+    { id: 're-v7', es: 'la propina', en: 'tip', pos: 'n.' },
+  ],
+  grammarNote: '"¿Qué me recomienda?" uses the polite (usted) form of recomendar. "Para" sets the quantity: "mesa para dos", "para llevar" (to go). To say something tastes good, use "estar": "está muy bueno / está riquísimo".',
+  roleplay: [
+    {
+      id: 're-r1',
+      prompt: '¿Mesa para cuántos?',
+      promptEn: 'Table for how many?',
+      accept: ['para dos por favor', 'para dos', 'una mesa para dos'],
+      hint: 'Say a table for two.',
+    },
+    {
+      id: 're-r2',
+      prompt: '¿Algo de tomar?',
+      promptEn: 'Something to drink?',
+      accept: ['dos jugos de mora que me recomienda', 'dos jugos de mora', 'que me recomienda'],
+      hint: 'Order drinks and/or ask for a recommendation.',
+    },
+    {
+      id: 're-r3',
+      prompt: '¿Les traigo algo más?',
+      promptEn: 'Can I bring you anything else?',
+      accept: ['la cuenta por favor', 'no la cuenta por favor', 'nada mas la cuenta por favor'],
+      hint: 'Ask for the check.',
+    },
+  ],
+  shadowing: ['re-2', 're-4', 're-7'],
+}

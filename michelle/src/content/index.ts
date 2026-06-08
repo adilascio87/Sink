@@ -1,11 +1,13 @@
 import type { Scenario } from '@/content/types'
 import { afecto } from '@/content/es/afecto'
 import { almuerzo } from '@/content/es/almuerzo'
+import { ayuda } from '@/content/es/ayuda'
 import { charla } from '@/content/es/charla'
 import { clima } from '@/content/es/clima'
 import { direcciones } from '@/content/es/direcciones'
 import { familia } from '@/content/es/familia'
 import { farmacia } from '@/content/es/farmacia'
+import { futuro } from '@/content/es/futuro'
 import { greetings } from '@/content/es/greetings'
 import { historia } from '@/content/es/historia'
 import { hotel } from '@/content/es/hotel'
@@ -16,6 +18,8 @@ import { opinion } from '@/content/es/opinion'
 import { pasado } from '@/content/es/pasado'
 import { planes } from '@/content/es/planes'
 import { presentar } from '@/content/es/presentar'
+import { restaurante } from '@/content/es/restaurante'
+import { ropa } from '@/content/es/ropa'
 import { sobremesa } from '@/content/es/sobremesa'
 import { taxi } from '@/content/es/taxi'
 import { tienda } from '@/content/es/tienda'
@@ -34,6 +38,8 @@ export const scenarios: Scenario[] = [
   taxi,
   charla,
   planes,
+  restaurante,
+  ropa,
   clima,
   familia,
   presentar,
@@ -41,7 +47,9 @@ export const scenarios: Scenario[] = [
   afecto,
   sobremesa,
   hotel,
+  ayuda,
   farmacia,
+  futuro,
   pasado,
   historia,
   opinion,

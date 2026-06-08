@@ -1,0 +1,60 @@
+import type { Scenario } from '@/content/types'
+
+export const ropa: Scenario = {
+  id: 'ropa',
+  tier: 2,
+  cefr: 'A2',
+  title: 'Comprar ropa',
+  goal: 'Shop for clothes: say what you\'re looking for, ask for a size/color, and try it on.',
+  culture: 'Sizes ("tallas") often use S/M/L or "pequeña/mediana/grande". "Me queda bien" (it fits me well) is the phrase you\'ll reach for constantly.',
+  dialogue: [
+    { id: 'ro-1', speaker: 'them', es: '¿Le ayudo en algo?', en: 'Can I help you with something?' },
+    { id: 'ro-2', speaker: 'you', es: 'Sí, busco una camiseta.', en: 'Yes, I\'m looking for a t-shirt.' },
+    { id: 'ro-3', speaker: 'them', es: '¿Qué talla usa?', en: 'What size do you wear?' },
+    { id: 'ro-4', speaker: 'you', es: 'Mediana. ¿La tiene en azul?', en: 'Medium. Do you have it in blue?' },
+    { id: 'ro-5', speaker: 'them', es: 'Sí, aquí está. ¿Se la quiere probar?', en: 'Yes, here it is. Do you want to try it on?' },
+    { id: 'ro-6', speaker: 'you', es: 'Sí, ¿dónde me la puedo probar?', en: 'Yes, where can I try it on?' },
+    { id: 'ro-7', speaker: 'you', es: 'Me queda bien. Me la llevo.', en: 'It fits me well. I\'ll take it.' },
+  ],
+  chunks: [
+    { id: 'ro-c1', es: 'busco una camiseta', en: 'I\'m looking for a t-shirt' },
+    { id: 'ro-c2', es: '¿Qué talla usa?', en: 'What size do you wear?' },
+    { id: 'ro-c3', es: '¿La tiene en azul?', en: 'Do you have it in blue?' },
+    { id: 'ro-c4', es: 'Me queda bien', en: 'It fits me well' },
+    { id: 'ro-c5', es: 'Me la llevo', en: 'I\'ll take it' },
+  ],
+  vocab: [
+    { id: 'ro-v1', es: 'la camiseta', en: 't-shirt', pos: 'n.' },
+    { id: 'ro-v2', es: 'la talla', en: 'size', pos: 'n.' },
+    { id: 'ro-v3', es: 'mediana', en: 'medium', pos: 'adj.' },
+    { id: 'ro-v4', es: 'azul', en: 'blue', pos: 'adj.' },
+    { id: 'ro-v5', es: 'probarse', en: 'to try on', pos: 'v.' },
+    { id: 'ro-v6', es: 'quedar', en: 'to fit', pos: 'v.' },
+    { id: 'ro-v7', es: 'llevar', en: 'to take / carry', pos: 'v.' },
+  ],
+  grammarNote: '"Quedar" describes fit: "me queda bien / grande / chico". "Me la llevo" stacks two pronouns: "me" (to me) + "la" (it, the shirt) — you\'ll meet these "double pronouns" a lot; learn useful ones as chunks for now.',
+  roleplay: [
+    {
+      id: 'ro-r1',
+      prompt: '¿Le ayudo en algo?',
+      promptEn: 'Can I help you with something?',
+      accept: ['si busco una camiseta', 'busco una camiseta', 'estoy buscando una camiseta'],
+      hint: 'Say you\'re looking for a t-shirt.',
+    },
+    {
+      id: 'ro-r2',
+      prompt: '¿Qué talla usa?',
+      promptEn: 'What size do you wear?',
+      accept: ['mediana la tiene en azul', 'mediana', 'mediana la tiene en azul por favor'],
+      hint: 'Give your size, maybe ask for a color.',
+    },
+    {
+      id: 'ro-r3',
+      prompt: '¿Se la quiere probar?',
+      promptEn: 'Do you want to try it on?',
+      accept: ['si donde me la puedo probar', 'si me la puedo probar', 'si donde me la pruebo'],
+      hint: 'Say yes and ask where to try it on.',
+    },
+  ],
+  shadowing: ['ro-2', 'ro-4', 'ro-7'],
+}
