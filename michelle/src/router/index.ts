@@ -14,6 +14,7 @@ export const router = createRouter({
     { path: '/verbs', name: 'verbs', component: () => import('@/views/VerbsView.vue') },
     { path: '/pronunciation', name: 'pronunciation', component: () => import('@/views/PronunciationView.vue') },
     { path: '/scenario/:id', name: 'scenario', component: () => import('@/views/ScenarioView.vue') },
+    { path: '/converse/:id', name: 'converse', component: () => import('@/views/ConversationView.vue') },
     { path: '/review', name: 'review', component: () => import('@/views/ReviewView.vue') },
     { path: '/progress', name: 'progress', component: () => import('@/views/ProgressView.vue') },
     { path: '/settings', name: 'settings', component: () => import('@/views/SettingsView.vue') },

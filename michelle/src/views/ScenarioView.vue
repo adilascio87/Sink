@@ -319,11 +319,14 @@ function finish() {
       </div>
       <h2 class="text-xl">Session complete</h2>
       <p class="text-[var(--color-ink-soft)]">
-        “{{ scenario.title }}” is now in your review rotation. Come back when it's due to lock it in.
+        “{{ scenario.title }}” is now in your review rotation. Ready to run the whole thing end to end?
       </p>
+      <button class="btn btn-primary" @click="router.push(`/converse/${scenario.id}`)">
+        Practice the whole conversation <ArrowRight class="size-4" />
+      </button>
       <div class="flex justify-center gap-2">
         <button class="btn btn-ghost" @click="router.push('/library')">Library</button>
-        <button class="btn btn-primary" @click="router.push('/')">Home</button>
+        <button class="btn btn-ghost" @click="router.push('/')">Home</button>
       </div>
     </section>
   </div>
