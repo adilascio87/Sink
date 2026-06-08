@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Check } from 'lucide-vue-next'
 import { computed } from 'vue'
 import { scenarios } from '@/content/index'
 import { useProgress } from '@/stores/progress'
@@ -13,8 +14,8 @@ const accuracyPct = computed(() => Math.round(progress.speakingAccuracy * 100))
 // "Active" = phrases whose memory has had a chance to consolidate.
 const activePhrases = computed(() => srs.allCards.filter(c => c.reps >= 1 && c.type === 'production').length)
 
-const completedTitles = computed(() =>
-  scenarios.filter(s => progress.isCompleted(s.id)).map(s => s.title),
+const completedScenarios = computed(() =>
+  scenarios.filter(s => progress.isCompleted(s.id)),
 )
 </script>
 
@@ -60,10 +61,16 @@ const completedTitles = computed(() =>
       You've practiced {{ progress.dayStreak }} day{{ progress.dayStreak === 1 ? '' : 's' }} in a row — gentle continuity, no pressure.
     </section>
 
-    <section v-if="completedTitles.length" class="space-y-2">
-      <h2 class="text-sm font-medium uppercase tracking-wide text-[var(--color-muted)]">Situations learned</h2>
+    <section v-if="completedScenarios.length" class="space-y-2">
+      <h2 class="text-sm font-medium uppercase tracking-wide text-[var(--color-muted)]">What you can do now</h2>
       <ul class="card divide-y divide-[var(--color-line)] p-0">
-        <li v-for="title in completedTitles" :key="title" class="px-4 py-3">{{ title }}</li>
+        <li v-for="s in completedScenarios" :key="s.id" class="flex items-start gap-3 px-4 py-3">
+          <Check class="mt-0.5 size-4 shrink-0 text-[var(--color-sage)]" />
+          <div>
+            <p class="font-medium">{{ s.title }}</p>
+            <p class="text-sm text-[var(--color-ink-soft)]">{{ s.goal }}</p>
+          </div>
+        </li>
       </ul>
     </section>
   </div>
