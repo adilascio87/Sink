@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Check } from 'lucide-vue-next'
 import { computed } from 'vue'
-import { scenarios } from '@/content/index'
+import { scenarios, totalLexicalItems } from '@/content/index'
 import { useProgress } from '@/stores/progress'
 import { useSrs } from '@/stores/srs'
 
@@ -17,6 +17,8 @@ const activePhrases = computed(() => srs.allCards.filter(c => c.reps >= 1 && c.t
 const completedScenarios = computed(() =>
   scenarios.filter(s => progress.isCompleted(s.id)),
 )
+
+const library = totalLexicalItems()
 </script>
 
 <template>
@@ -55,6 +57,11 @@ const completedScenarios = computed(() =>
         <p class="text-3xl font-semibold">{{ srs.dueCount }}</p>
         <p class="mt-1 text-sm text-[var(--color-muted)]">cards due now</p>
       </div>
+    </section>
+
+    <section class="card p-4 text-sm text-[var(--color-ink-soft)]">
+      Your vocabulary library holds <strong>{{ library }}</strong> words and phrases to learn,
+      across daily life, family, school, work, health and more — growing toward high-school breadth.
     </section>
 
     <section v-if="progress.dayStreak > 0" class="card p-4 text-sm text-[var(--color-ink-soft)]">

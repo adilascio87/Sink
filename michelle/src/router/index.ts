@@ -11,6 +11,7 @@ export const router = createRouter({
     { path: '/plan', name: 'plan', component: () => import('@/views/PlanView.vue') },
     { path: '/builder', name: 'builder', component: () => import('@/views/BuilderView.vue') },
     { path: '/phrasebook', name: 'phrasebook', component: () => import('@/views/PhrasebookView.vue') },
+    { path: '/vocabulary', name: 'vocabulary', component: () => import('@/views/VocabularyView.vue') },
     { path: '/verbs', name: 'verbs', component: () => import('@/views/VerbsView.vue') },
     { path: '/pronunciation', name: 'pronunciation', component: () => import('@/views/PronunciationView.vue') },
     { path: '/scenario/:id', name: 'scenario', component: () => import('@/views/ScenarioView.vue') },

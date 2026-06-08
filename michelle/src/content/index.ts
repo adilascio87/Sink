@@ -24,6 +24,7 @@ import { sobremesa } from '@/content/es/sobremesa'
 import { taxi } from '@/content/es/taxi'
 import { tienda } from '@/content/es/tienda'
 import { composeEn, composeEs, patterns } from '@/content/patterns'
+import { vocabPacks } from '@/content/vocab'
 
 // Scenarios ordered as a learning path across tiers. The "family & connection"
 // cluster (familia → sobremesa) is the heart of the app's purpose: real
@@ -100,7 +101,32 @@ export function patternStudyItems(): StudyItem[] {
   }))
 }
 
-/** Look up a study item by its id across all scenarios and builder frames. */
+// Thematic vocabulary packs, exposed as study items for spaced repetition.
+export function vocabStudyItems(): StudyItem[] {
+  const items: StudyItem[] = []
+  for (const pack of vocabPacks) {
+    pack.words.forEach((w, i) => items.push({
+      id: `voc-${pack.id}-${i}`,
+      scenarioId: `vocab:${pack.id}`,
+      es: w.es,
+      en: w.en,
+      kind: 'vocab',
+    }))
+  }
+  return items
+}
+
+export function vocabItemsForPack(packId: string): StudyItem[] {
+  return vocabStudyItems().filter(i => i.scenarioId === `vocab:${packId}`)
+}
+
+/** Total lexical items available to learn across the whole app. */
+export function totalLexicalItems(): number {
+  const scenarioItems = scenarios.reduce((n, s) => n + s.chunks.length + s.vocab.length, 0)
+  return scenarioItems + patternStudyItems().length + vocabStudyItems().length
+}
+
+/** Look up a study item by its id across scenarios, builder frames and vocab. */
 export function findStudyItem(itemId: string): StudyItem | undefined {
   for (const scenario of scenarios) {
     const item = studyItems(scenario).find(i => i.id === itemId)
@@ -108,4 +134,5 @@ export function findStudyItem(itemId: string): StudyItem | undefined {
       return item
   }
   return patternStudyItems().find(i => i.id === itemId)
+    ?? vocabStudyItems().find(i => i.id === itemId)
 }

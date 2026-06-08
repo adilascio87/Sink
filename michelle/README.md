@@ -52,12 +52,17 @@ It is a **single self-contained file**. Double-click it and it opens in your bro
 - **Conversation mode** — run a whole scenario end-to-end as a continuous back-and-forth where you speak every one of your lines (the closest practice to a real chat)
 - **Guided 7-day starter path** — an opinionated sequence from your first "hola" to holding a family conversation, so there's always a clear next step
 - **Sounds** — pronunciation focus on the sounds that decide whether you're understood (pure vowels, the tap/trill r, ñ, throaty j, soft d, b=v, silent h, seseo), with minimal pairs
-- **Key verbs** — reference + an active-recall **quiz** for the eight verbs that unlock most speech (ser, estar, tener, ir, hacer, querer, poder, gustar)
+- **Vocabulary** — 15 thematic word packs (family, school, daily routine, house, food, body & health, clothing & colors, hobbies, jobs, the city, technology, nature, descriptions, emotions, calendar) you can browse, hear, and send into spaced repetition
+- **Key verbs** — the eight highest-frequency verbs across **five tenses** (present, preterite, imperfect, future, conditional), with reference tables and an active-recall **quiz** over every verb/tense/form
 - **Phrasebook** — every key phrase in one searchable, tap-to-hear list
 - **Free-practice mode** + an in-lesson **"ES only" challenge toggle** (hide English to force recall)
 - Progress dashboard (measured in *situations you can hold*, not points), a clean near-monochrome non-gamified UI, and on-device data with export/import
 
-Next per the roadmap: deeper Tier 3–4 content, richer pronunciation practice, optional installable polish.
+### Level
+
+Michelle now spans **CEFR A1 → B1+ (≈ US high-school Spanish 1–4 / AP)**: ~600 lexical items and phrases, five verb tenses, and grammar from greetings through the preterite/imperfect, future, conditional, and reflexive verbs. The vocabulary library keeps growing toward full high-school breadth (~1,500 words).
+
+Next per the roadmap: more vocabulary packs and scenarios toward B2, richer pronunciation practice, optional installable polish.
 
 ## Use it — no hosting required
 
