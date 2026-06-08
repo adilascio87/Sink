@@ -29,9 +29,17 @@ const tiers = computed(() => {
 
 <template>
   <div class="space-y-8">
-    <header>
-      <h1 class="text-2xl">Library</h1>
-      <p class="mt-1 text-[var(--color-ink-soft)]">Every situation, organized by how essential it is. Jump in anywhere.</p>
+    <header class="flex items-start justify-between gap-3">
+      <div>
+        <h1 class="text-2xl">Library</h1>
+        <p class="mt-1 text-[var(--color-ink-soft)]">Every situation, organized by how essential it is. Jump in anywhere.</p>
+      </div>
+      <button
+        class="shrink-0 text-sm text-[var(--color-ink-soft)] underline-offset-4 hover:underline"
+        @click="router.push('/phrasebook')"
+      >
+        Phrasebook →
+      </button>
     </header>
 
     <section v-for="group in tiers" :key="group.tier" class="space-y-3">

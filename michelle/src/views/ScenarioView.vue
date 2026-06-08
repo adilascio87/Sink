@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { RoleplayStep } from '@/content/types'
-import { ArrowRight, Check, Lightbulb, Mic, RotateCcw, X } from 'lucide-vue-next'
+import { ArrowRight, Check, Eye, EyeOff, Lightbulb, Mic, RotateCcw, X } from 'lucide-vue-next'
 import { computed, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import SpeakButton from '@/components/SpeakButton.vue'
@@ -112,14 +112,24 @@ function finish() {
 
   <div v-else class="space-y-6">
     <!-- progress rail -->
-    <div class="flex items-center gap-2 text-xs text-[var(--color-muted)]">
-      <span :class="phase === 'intro' ? 'text-[var(--color-clay)] font-medium' : ''">Intro</span>
-      <span>·</span>
-      <span :class="phase === 'input' ? 'text-[var(--color-clay)] font-medium' : ''">Learn</span>
-      <span>·</span>
-      <span :class="phase === 'roleplay' ? 'text-[var(--color-clay)] font-medium' : ''">Speak</span>
-      <span>·</span>
-      <span :class="phase === 'listening' ? 'text-[var(--color-clay)] font-medium' : ''">Listen</span>
+    <div class="flex items-center justify-between gap-2 text-xs text-[var(--color-muted)]">
+      <div class="flex items-center gap-2">
+        <span :class="phase === 'intro' ? 'text-[var(--color-clay)] font-medium' : ''">Intro</span>
+        <span>·</span>
+        <span :class="phase === 'input' ? 'text-[var(--color-clay)] font-medium' : ''">Learn</span>
+        <span>·</span>
+        <span :class="phase === 'roleplay' ? 'text-[var(--color-clay)] font-medium' : ''">Speak</span>
+        <span>·</span>
+        <span :class="phase === 'listening' ? 'text-[var(--color-clay)] font-medium' : ''">Listen</span>
+      </div>
+      <button
+        class="flex items-center gap-1 rounded-full border border-[var(--color-line)] px-2.5 py-1 hover:bg-[var(--color-paper-2)]"
+        :title="settings.showEnglish ? 'Hide English (challenge mode)' : 'Show English'"
+        @click="settings.showEnglish = !settings.showEnglish"
+      >
+        <component :is="settings.showEnglish ? Eye : EyeOff" class="size-3.5" />
+        {{ settings.showEnglish ? 'EN on' : 'ES only' }}
+      </button>
     </div>
 
     <!-- INTRO -->

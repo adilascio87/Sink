@@ -47,12 +47,13 @@ It is a **single self-contained file**. Double-click it and it opens in your bro
 - The full daily loop: scenario **intro → learn → speak (roleplay) → listening gym → cool-down**
 - **FSRS-lite** spaced-repetition engine with comprehension + production cards
 - **Speaking & listening** via the Web Speech API (TTS + on-device recognition), with a self-grading fallback where recognition isn't supported
-- **Eighteen Ecuador-flavored scenarios** across all four tiers, including a **"family & connection" cluster** built for the real goal — talking with relatives: talking about your family, meeting relatives, the *sobremesa*, a phone call with grandma, and expressing affection/missing people
-- **Sentence Builder** — learn a productive frame ("Quiero ___", "¿Me puedes pasar ___?") and swap the ending to *generate your own* sentences (Michel Thomas + Pimsleur-inspired); see [docs/METHODS.md](docs/METHODS.md)
-- **Free-practice mode** — drill your production phrases any time (no schedule impact), e.g. in the car
+- **Twenty Ecuador-flavored scenarios** across all four tiers, including a **"family & connection" cluster** built for the real goal — talking with relatives: family, meeting relatives, the *sobremesa*, a call with grandma, affection/goodbyes, catching up on news, and giving opinions warmly
+- **Sentence Builder** — learn a productive frame ("Quiero ___", "¿Me puedes pasar ___?") and swap the ending to *generate your own* sentences (Michel Thomas + Pimsleur-inspired); its frames can be added into spaced repetition too. See [docs/METHODS.md](docs/METHODS.md)
+- **Phrasebook** — every key phrase in one searchable, tap-to-hear list
+- **Free-practice mode** + an in-lesson **"ES only" challenge toggle** (hide English to force recall)
 - Progress dashboard (measured in *situations you can hold*, not points), a clean near-monochrome non-gamified UI, and on-device data with export/import
 
-Next per the roadmap: deeper Tier 3–4 content, a hide-English challenge toggle in lessons, optional installable polish.
+Next per the roadmap: deeper Tier 3–4 content, richer pronunciation practice, optional installable polish.
 
 ## Use it — no hosting required
 

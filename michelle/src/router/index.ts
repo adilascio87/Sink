@@ -9,6 +9,7 @@ export const router = createRouter({
     { path: '/', name: 'home', component: () => import('@/views/HomeView.vue') },
     { path: '/library', name: 'library', component: () => import('@/views/LibraryView.vue') },
     { path: '/builder', name: 'builder', component: () => import('@/views/BuilderView.vue') },
+    { path: '/phrasebook', name: 'phrasebook', component: () => import('@/views/PhrasebookView.vue') },
     { path: '/scenario/:id', name: 'scenario', component: () => import('@/views/ScenarioView.vue') },
     { path: '/review', name: 'review', component: () => import('@/views/ReviewView.vue') },
     { path: '/progress', name: 'progress', component: () => import('@/views/ProgressView.vue') },

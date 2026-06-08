@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import type { Filler, Pattern } from '@/content/patterns'
-import { Shuffle, Volume2 } from 'lucide-vue-next'
+import { Check, Shuffle, Volume2 } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
+import { patternStudyItems } from '@/content/index'
 import { composeEn, composeEs, patterns } from '@/content/patterns'
 import { speak, ttsSupported } from '@/lib/speech'
 import { useSettings } from '@/stores/settings'
+import { useSrs } from '@/stores/srs'
 
 const settings = useSettings()
+const srs = useSrs()
 const supported = ttsSupported()
+
+const added = ref(false)
+function addToReview() {
+  srs.enroll(patternStudyItems())
+  added.value = true
+}
 
 const pIndex = ref(0)
 const fIndex = ref(0)
@@ -107,5 +116,15 @@ function shuffleFiller() {
     <p class="card bg-[var(--color-paper-2)] p-4 text-sm text-[var(--color-ink-soft)]">
       {{ pattern.note }}
     </p>
+
+    <!-- send the frames into spaced repetition -->
+    <div class="border-t border-[var(--color-line)] pt-4 text-center">
+      <button v-if="!added" class="btn btn-ghost" @click="addToReview">
+        Add these frames to my Review
+      </button>
+      <p v-else class="inline-flex items-center gap-1.5 text-sm text-[var(--color-sage)]">
+        <Check class="size-4" /> Added — they'll come up in Review.
+      </p>
+    </div>
   </div>
 </template>

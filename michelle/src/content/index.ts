@@ -7,16 +7,19 @@ import { direcciones } from '@/content/es/direcciones'
 import { familia } from '@/content/es/familia'
 import { farmacia } from '@/content/es/farmacia'
 import { greetings } from '@/content/es/greetings'
+import { historia } from '@/content/es/historia'
 import { hotel } from '@/content/es/hotel'
 import { llamada } from '@/content/es/llamada'
 import { mercado } from '@/content/es/mercado'
 import { numeros } from '@/content/es/numeros'
+import { opinion } from '@/content/es/opinion'
 import { pasado } from '@/content/es/pasado'
 import { planes } from '@/content/es/planes'
 import { presentar } from '@/content/es/presentar'
 import { sobremesa } from '@/content/es/sobremesa'
 import { taxi } from '@/content/es/taxi'
 import { tienda } from '@/content/es/tienda'
+import { composeEn, composeEs, patterns } from '@/content/patterns'
 
 // Scenarios ordered as a learning path across tiers. The "family & connection"
 // cluster (familia → sobremesa) is the heart of the app's purpose: real
@@ -40,6 +43,8 @@ export const scenarios: Scenario[] = [
   hotel,
   farmacia,
   pasado,
+  historia,
+  opinion,
 ]
 
 export function getScenario(id: string): Scenario | undefined {
@@ -74,12 +79,25 @@ export function studyItems(scenario: Scenario): StudyItem[] {
   return [...chunks, ...vocab]
 }
 
-/** Look up a study item by its id across all scenarios. */
+// Sentence Builder frames, exposed as study items so the productive patterns
+// you learn can also be reviewed by spaced repetition. Each pattern contributes
+// its model sentence (frame + first filler).
+export function patternStudyItems(): StudyItem[] {
+  return patterns.map(p => ({
+    id: `pat-${p.id}`,
+    scenarioId: 'builder',
+    es: composeEs(p, p.fillers[0]),
+    en: composeEn(p, p.fillers[0]),
+    kind: 'chunk' as const,
+  }))
+}
+
+/** Look up a study item by its id across all scenarios and builder frames. */
 export function findStudyItem(itemId: string): StudyItem | undefined {
   for (const scenario of scenarios) {
     const item = studyItems(scenario).find(i => i.id === itemId)
     if (item)
       return item
   }
-  return undefined
+  return patternStudyItems().find(i => i.id === itemId)
 }
