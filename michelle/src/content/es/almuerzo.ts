@@ -1,0 +1,61 @@
+import type { Scenario } from '@/content/types'
+
+export const almuerzo: Scenario = {
+  id: 'almuerzo',
+  tier: 1,
+  cefr: 'A1',
+  title: 'El almuerzo',
+  goal: 'Order the set lunch (almuerzo) — the everyday Ecuadorian meal — and ask what\'s included.',
+  culture: 'The "almuerzo" is a fixed-price set lunch found everywhere in Ecuador (often $2.50–$4). It usually includes a soup (sopa), a main (segundo) with rice, and a fresh juice (jugo). Just ask "¿Qué hay de almuerzo?"',
+  dialogue: [
+    { id: 'a-1', speaker: 'them', es: 'Buenas, ¿qué va a servirse?', en: 'Hello, what will you have?', note: '"servirse" is a polite Ecuadorian way to say "to eat/have".' },
+    { id: 'a-2', speaker: 'you', es: '¿Qué hay de almuerzo?', en: 'What\'s for lunch (today)?' },
+    { id: 'a-3', speaker: 'them', es: 'Hay sopa de pollo y segundo de carne con arroz.', en: 'There\'s chicken soup and a beef main with rice.' },
+    { id: 'a-4', speaker: 'you', es: 'Deme un almuerzo, por favor. ¿Con qué viene el jugo?', en: 'Give me one set lunch, please. What\'s the juice?' },
+    { id: 'a-5', speaker: 'them', es: 'El jugo es de mora. ¿Algo más?', en: 'The juice is blackberry. Anything else?' },
+    { id: 'a-6', speaker: 'you', es: 'Nada más, gracias. ¿Cuánto es?', en: 'Nothing else, thanks. How much is it?' },
+    { id: 'a-7', speaker: 'them', es: 'Son tres dólares.', en: 'It\'s three dollars.' },
+  ],
+  chunks: [
+    { id: 'a-c1', es: '¿Qué hay de almuerzo?', en: 'What\'s for lunch (today)?' },
+    { id: 'a-c2', es: 'Deme un almuerzo, por favor', en: 'Give me one set lunch, please' },
+    { id: 'a-c3', es: '¿Algo más?', en: 'Anything else?' },
+    { id: 'a-c4', es: 'Nada más, gracias', en: 'Nothing else, thanks' },
+    { id: 'a-c5', es: '¿Cuánto es?', en: 'How much is it?' },
+  ],
+  vocab: [
+    { id: 'a-v1', es: 'el almuerzo', en: 'set lunch', pos: 'n.' },
+    { id: 'a-v2', es: 'la sopa', en: 'soup', pos: 'n.' },
+    { id: 'a-v3', es: 'el segundo', en: 'main course', pos: 'n.' },
+    { id: 'a-v4', es: 'el arroz', en: 'rice', pos: 'n.' },
+    { id: 'a-v5', es: 'el jugo', en: 'juice', pos: 'n.' },
+    { id: 'a-v6', es: 'la carne', en: 'meat / beef', pos: 'n.' },
+    { id: 'a-v7', es: 'el pollo', en: 'chicken', pos: 'n.' },
+    { id: 'a-v8', es: 'por favor', en: 'please', pos: 'phrase' },
+  ],
+  grammarNote: '"Deme" is the polite (usted) command of "dar" (to give) — "give me". It\'s the workhorse for ordering: "Deme un café", "Deme dos panes". The informal (tú) version is "Dame".',
+  roleplay: [
+    {
+      id: 'a-r1',
+      prompt: 'Buenas, ¿qué va a servirse?',
+      promptEn: 'Hello, what will you have?',
+      accept: ['que hay de almuerzo', 'deme un almuerzo por favor', 'un almuerzo por favor'],
+      hint: 'Ask what\'s for lunch, or just order an almuerzo.',
+    },
+    {
+      id: 'a-r2',
+      prompt: 'El jugo es de mora. ¿Algo más?',
+      promptEn: 'The juice is blackberry. Anything else?',
+      accept: ['nada mas gracias', 'no nada mas gracias', 'eso es todo gracias'],
+      hint: 'Say "nothing else, thanks".',
+    },
+    {
+      id: 'a-r3',
+      prompt: 'Son tres dólares.',
+      promptEn: 'It\'s three dollars.',
+      accept: ['aqui tiene', 'aqui tiene gracias', 'gracias aqui esta'],
+      hint: 'Hand over the money: "Aquí tiene."',
+    },
+  ],
+  shadowing: ['a-2', 'a-4', 'a-6'],
+}

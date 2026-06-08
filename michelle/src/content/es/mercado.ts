@@ -1,0 +1,61 @@
+import type { Scenario } from '@/content/types'
+
+export const mercado: Scenario = {
+  id: 'mercado',
+  tier: 1,
+  cefr: 'A1',
+  title: 'En el mercado',
+  goal: 'Ask prices, handle numbers and dollars, and buy fruit at the market.',
+  culture: 'Ecuador uses the US dollar, so prices are familiar. At markets you buy by "la libra" (pound) and you can gently bargain. A bag is "una funda". "¿A cómo está…?" means "how much is…?".',
+  dialogue: [
+    { id: 'm-1', speaker: 'you', es: 'Buenas, ¿a cómo está la libra de tomate?', en: 'Hello, how much is a pound of tomatoes?' },
+    { id: 'm-2', speaker: 'them', es: 'A un dólar la libra, casero.', en: 'A dollar a pound, my friend.', note: '"casero/a" = regular customer; a friendly market address.' },
+    { id: 'm-3', speaker: 'you', es: '¿Me da dos libras? Y una funda, por favor.', en: 'Can you give me two pounds? And a bag, please.' },
+    { id: 'm-4', speaker: 'them', es: 'Claro. Son dos dólares.', en: 'Sure. That\'s two dollars.' },
+    { id: 'm-5', speaker: 'you', es: '¿No me hace una rebajita?', en: 'Won\'t you give me a little discount?' },
+    { id: 'm-6', speaker: 'them', es: 'Le dejo en uno cincuenta. ¿Le doy algo más?', en: 'I\'ll let you have it for one fifty. Anything else?' },
+    { id: 'm-7', speaker: 'you', es: 'No, gracias. Aquí tiene.', en: 'No, thanks. Here you go.' },
+  ],
+  chunks: [
+    { id: 'm-c1', es: '¿A cómo está…?', en: 'How much is…? (per unit)' },
+    { id: 'm-c2', es: '¿Me da…?', en: 'Can you give me…?' },
+    { id: 'm-c3', es: 'una funda', en: 'a bag' },
+    { id: 'm-c4', es: '¿No me hace una rebajita?', en: 'Won\'t you give me a little discount?' },
+    { id: 'm-c5', es: 'Aquí tiene', en: 'Here you go' },
+  ],
+  vocab: [
+    { id: 'm-v1', es: 'la libra', en: 'pound (weight)', pos: 'n.' },
+    { id: 'm-v2', es: 'el dólar', en: 'dollar', pos: 'n.' },
+    { id: 'm-v3', es: 'el tomate', en: 'tomato', pos: 'n.' },
+    { id: 'm-v4', es: 'la funda', en: 'bag', pos: 'n.' },
+    { id: 'm-v5', es: 'uno', en: 'one', pos: 'num.' },
+    { id: 'm-v6', es: 'dos', en: 'two', pos: 'num.' },
+    { id: 'm-v7', es: 'cincuenta', en: 'fifty', pos: 'num.' },
+    { id: 'm-v8', es: 'la rebaja', en: 'discount', pos: 'n.' },
+  ],
+  grammarNote: 'Prices are read as plain numbers: "uno cincuenta" = $1.50, "dos veinticinco" = $2.25. The "-ita" ending in "rebajita" is a diminutive that softens the request and is extremely common in Ecuadorian speech ("un ratito", "ahorita").',
+  roleplay: [
+    {
+      id: 'm-r1',
+      prompt: '¿Qué le doy, casero?',
+      promptEn: 'What can I get you, friend?',
+      accept: ['a como esta la libra de tomate', 'me da dos libras de tomate', 'a como esta el tomate'],
+      hint: 'Ask the price per pound, or ask for two pounds.',
+    },
+    {
+      id: 'm-r2',
+      prompt: 'Son dos dólares.',
+      promptEn: 'That\'s two dollars.',
+      accept: ['no me hace una rebajita', 'me hace una rebajita', 'no me rebaja'],
+      hint: 'Politely ask for a little discount.',
+    },
+    {
+      id: 'm-r3',
+      prompt: 'Le dejo en uno cincuenta. ¿Le doy algo más?',
+      promptEn: 'I\'ll let you have it for one fifty. Anything else?',
+      accept: ['no gracias aqui tiene', 'no gracias', 'nada mas gracias aqui tiene'],
+      hint: 'Decline and hand over the money.',
+    },
+  ],
+  shadowing: ['m-1', 'm-3', 'm-5'],
+}

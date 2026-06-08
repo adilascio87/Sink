@@ -1,0 +1,60 @@
+import type { Scenario } from '@/content/types'
+
+export const greetings: Scenario = {
+  id: 'greetings',
+  tier: 1,
+  cefr: 'A1',
+  title: 'Saludos y presentaciones',
+  goal: 'Greet someone, introduce yourself, and ask how they are — the Ecuadorian way.',
+  culture: 'On the Ecuadorian coast you\'ll constantly hear "¿Qué más?" as a casual "what\'s up?". "Buenas" works any time of day. "Chévere" and "bacán" both mean "cool / great".',
+  dialogue: [
+    { id: 'g-1', speaker: 'them', es: '¡Buenas! ¿Qué más?', en: 'Hi! What\'s up?', note: 'Very common informal greeting in Ecuador.' },
+    { id: 'g-2', speaker: 'you', es: 'Todo bien, gracias. ¿Y usted?', en: 'All good, thanks. And you?' },
+    { id: 'g-3', speaker: 'them', es: 'Bien también. ¿Cómo te llamas?', en: 'Good too. What\'s your name?' },
+    { id: 'g-4', speaker: 'you', es: 'Me llamo Alex. ¿Y usted?', en: 'My name is Alex. And you?' },
+    { id: 'g-5', speaker: 'them', es: 'Yo soy María. Mucho gusto.', en: 'I\'m María. Nice to meet you.' },
+    { id: 'g-6', speaker: 'you', es: 'El gusto es mío.', en: 'The pleasure is mine.' },
+  ],
+  chunks: [
+    { id: 'g-c1', es: '¿Qué más?', en: 'What\'s up? / How\'s it going?' },
+    { id: 'g-c2', es: 'Todo bien, gracias', en: 'All good, thanks' },
+    { id: 'g-c3', es: '¿Cómo te llamas?', en: 'What\'s your name?', literal: 'how yourself you-call' },
+    { id: 'g-c4', es: 'Me llamo…', en: 'My name is…', literal: 'myself I-call' },
+    { id: 'g-c5', es: 'Mucho gusto', en: 'Nice to meet you' },
+    { id: 'g-c6', es: 'El gusto es mío', en: 'The pleasure is mine' },
+  ],
+  vocab: [
+    { id: 'g-v1', es: 'buenas', en: 'hello (any time)', pos: 'interj.' },
+    { id: 'g-v2', es: 'bien', en: 'well / fine', pos: 'adv.' },
+    { id: 'g-v3', es: 'gracias', en: 'thank you', pos: 'interj.' },
+    { id: 'g-v4', es: 'usted', en: 'you (formal)', pos: 'pron.' },
+    { id: 'g-v5', es: 'también', en: 'too / also', pos: 'adv.' },
+    { id: 'g-v6', es: 'chévere', en: 'cool / great', pos: 'adj.' },
+    { id: 'g-v7', es: 'gusto', en: 'pleasure', pos: 'n.' },
+  ],
+  grammarNote: 'Ecuadorians often default to "usted" even with peers as a sign of warmth and respect, especially in the highlands (sierra). "tú" is also fine and common on the coast. When unsure, "usted" is the safe choice.',
+  roleplay: [
+    {
+      id: 'g-r1',
+      prompt: '¡Buenas! ¿Qué más?',
+      promptEn: 'Hi! What\'s up?',
+      accept: ['todo bien gracias', 'todo bien gracias y usted', 'bien gracias', 'todo bien y usted'],
+      hint: 'Say you\'re all good and thank them.',
+    },
+    {
+      id: 'g-r2',
+      prompt: '¿Cómo te llamas?',
+      promptEn: 'What\'s your name?',
+      accept: ['me llamo alex', 'me llamo alex y usted', 'yo me llamo alex'],
+      hint: 'Use "Me llamo…" + your name.',
+    },
+    {
+      id: 'g-r3',
+      prompt: 'Yo soy María. Mucho gusto.',
+      promptEn: 'I\'m María. Nice to meet you.',
+      accept: ['el gusto es mio', 'mucho gusto', 'igualmente'],
+      hint: 'Return the pleasure: "El gusto es mío."',
+    },
+  ],
+  shadowing: ['g-1', 'g-2', 'g-3', 'g-5', 'g-6'],
+}

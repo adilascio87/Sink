@@ -1,0 +1,60 @@
+import type { Scenario } from '@/content/types'
+
+export const tienda: Scenario = {
+  id: 'tienda',
+  tier: 1,
+  cefr: 'A1',
+  title: 'En la tienda',
+  goal: 'Buy everyday items at a corner store (tienda) and pay.',
+  culture: 'The neighborhood "tienda" is where Ecuadorians grab water, bread, and snacks. "¿Me da…?" is the standard way to ask for something. Bread rolls are "pan"; water is often sold as a "botella" or "funda".',
+  dialogue: [
+    { id: 's-1', speaker: 'them', es: 'Buenas, ¿qué le doy?', en: 'Hello, what can I get you?' },
+    { id: 's-2', speaker: 'you', es: '¿Tiene agua sin gas?', en: 'Do you have still water?' },
+    { id: 's-3', speaker: 'them', es: 'Sí, claro. ¿Grande o pequeña?', en: 'Yes, of course. Large or small?' },
+    { id: 's-4', speaker: 'you', es: 'Una grande. Y deme dos panes, por favor.', en: 'A large one. And give me two bread rolls, please.' },
+    { id: 's-5', speaker: 'them', es: 'Listo. ¿Algo más?', en: 'Done. Anything else?' },
+    { id: 's-6', speaker: 'you', es: 'Eso es todo. ¿Cuánto le debo?', en: 'That\'s all. How much do I owe you?' },
+    { id: 's-7', speaker: 'them', es: 'Un dólar con diez.', en: 'One dollar ten.' },
+  ],
+  chunks: [
+    { id: 's-c1', es: '¿Tiene…?', en: 'Do you have…?' },
+    { id: 's-c2', es: '¿Me da…?', en: 'Can you give me…?' },
+    { id: 's-c3', es: 'Eso es todo', en: 'That\'s all' },
+    { id: 's-c4', es: '¿Cuánto le debo?', en: 'How much do I owe you?' },
+    { id: 's-c5', es: 'sin gas / con gas', en: 'still / sparkling' },
+  ],
+  vocab: [
+    { id: 's-v1', es: 'el agua', en: 'water', pos: 'n.' },
+    { id: 's-v2', es: 'el pan', en: 'bread / roll', pos: 'n.' },
+    { id: 's-v3', es: 'grande', en: 'big / large', pos: 'adj.' },
+    { id: 's-v4', es: 'pequeño', en: 'small', pos: 'adj.' },
+    { id: 's-v5', es: 'la botella', en: 'bottle', pos: 'n.' },
+    { id: 's-v6', es: 'deber', en: 'to owe', pos: 'v.' },
+    { id: 's-v7', es: 'listo', en: 'ready / done', pos: 'adj.' },
+  ],
+  grammarNote: 'Decimals in prices use "con": "un dólar con diez" = $1.10. Note "el agua" — it\'s feminine but takes "el" in the singular because it starts with a stressed "a" (you still say "agua fría", "las aguas").',
+  roleplay: [
+    {
+      id: 's-r1',
+      prompt: 'Buenas, ¿qué le doy?',
+      promptEn: 'Hello, what can I get you?',
+      accept: ['tiene agua sin gas', 'me da una agua sin gas', 'me da agua sin gas'],
+      hint: 'Ask if they have still water.',
+    },
+    {
+      id: 's-r2',
+      prompt: '¿Grande o pequeña?',
+      promptEn: 'Large or small?',
+      accept: ['una grande', 'grande por favor', 'una grande por favor'],
+      hint: 'Choose the large one.',
+    },
+    {
+      id: 's-r3',
+      prompt: '¿Algo más?',
+      promptEn: 'Anything else?',
+      accept: ['eso es todo cuanto le debo', 'eso es todo', 'no eso es todo cuanto le debo'],
+      hint: 'Say that\'s all and ask the total.',
+    },
+  ],
+  shadowing: ['s-2', 's-4', 's-6'],
+}

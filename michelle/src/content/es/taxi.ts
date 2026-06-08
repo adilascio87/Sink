@@ -1,0 +1,60 @@
+import type { Scenario } from '@/content/types'
+
+export const taxi: Scenario = {
+  id: 'taxi',
+  tier: 1,
+  cefr: 'A1',
+  title: 'Tomar un taxi',
+  goal: 'Take a taxi: give a destination, agree a fare, and direct the driver.',
+  culture: 'In many Ecuadorian cities taxis should use the meter ("taxímetro"), but it\'s normal to confirm the fare first: "¿Cuánto me cobra a…?". "Siga derecho" means "go straight" (not "right" — that\'s "a la derecha").',
+  dialogue: [
+    { id: 't-1', speaker: 'you', es: 'Buenas, ¿me lleva al centro?', en: 'Hello, can you take me downtown?' },
+    { id: 't-2', speaker: 'them', es: 'Claro, suba. ¿A qué parte?', en: 'Sure, get in. Which part?' },
+    { id: 't-3', speaker: 'you', es: 'Al parque central. ¿Cuánto me cobra?', en: 'To the central park. How much do you charge?' },
+    { id: 't-4', speaker: 'them', es: 'Le cobro dos cincuenta.', en: 'I\'ll charge you two fifty.' },
+    { id: 't-5', speaker: 'you', es: 'Está bien. Siga derecho, por favor.', en: 'Okay. Go straight, please.' },
+    { id: 't-6', speaker: 'them', es: '¿Aquí le dejo?', en: 'Shall I drop you here?' },
+    { id: 't-7', speaker: 'you', es: 'Sí, aquí no más. Gracias.', en: 'Yes, right here. Thanks.', note: '"no más" softens to "just / right" — "aquí no más" = "right here is fine".' },
+  ],
+  chunks: [
+    { id: 't-c1', es: '¿Me lleva a…?', en: 'Can you take me to…?' },
+    { id: 't-c2', es: '¿Cuánto me cobra?', en: 'How much do you charge?' },
+    { id: 't-c3', es: 'Siga derecho', en: 'Go straight' },
+    { id: 't-c4', es: 'Aquí no más', en: 'Right here (is fine)' },
+    { id: 't-c5', es: 'Está bien', en: 'Okay / that\'s fine' },
+  ],
+  vocab: [
+    { id: 't-v1', es: 'el centro', en: 'downtown / center', pos: 'n.' },
+    { id: 't-v2', es: 'el parque', en: 'park', pos: 'n.' },
+    { id: 't-v3', es: 'derecho', en: 'straight ahead', pos: 'adv.' },
+    { id: 't-v4', es: 'la derecha', en: 'the right (side)', pos: 'n.' },
+    { id: 't-v5', es: 'la izquierda', en: 'the left (side)', pos: 'n.' },
+    { id: 't-v6', es: 'cobrar', en: 'to charge', pos: 'v.' },
+    { id: 't-v7', es: 'la esquina', en: 'corner', pos: 'n.' },
+  ],
+  grammarNote: '"Siga", "suba", "doble" are polite (usted) commands of seguir, subir, doblar. To direct a driver you mostly need: "siga derecho" (go straight), "doble a la derecha/izquierda" (turn right/left), "pare aquí" (stop here).',
+  roleplay: [
+    {
+      id: 't-r1',
+      prompt: 'Buenas, ¿a dónde le llevo?',
+      promptEn: 'Hello, where shall I take you?',
+      accept: ['me lleva al centro', 'al centro por favor', 'al parque central'],
+      hint: 'Ask to be taken downtown / to the park.',
+    },
+    {
+      id: 't-r2',
+      prompt: 'Le cobro dos cincuenta.',
+      promptEn: 'I\'ll charge you two fifty.',
+      accept: ['esta bien', 'esta bien siga derecho', 'ok esta bien'],
+      hint: 'Agree: "Está bien."',
+    },
+    {
+      id: 't-r3',
+      prompt: '¿Aquí le dejo?',
+      promptEn: 'Shall I drop you here?',
+      accept: ['si aqui no mas gracias', 'si aqui no mas', 'aqui no mas gracias'],
+      hint: 'Say "right here is fine, thanks".',
+    },
+  ],
+  shadowing: ['t-1', 't-3', 't-5', 't-7'],
+}

@@ -1,0 +1,60 @@
+import type { Scenario } from '@/content/types'
+
+export const charla: Scenario = {
+  id: 'charla',
+  tier: 2,
+  cefr: 'A2',
+  title: 'Charla rápida',
+  goal: 'Make small talk: where you\'re from, what you do, and how you like Ecuador.',
+  culture: 'Ecuadorians are warm and curious with visitors. Expect "¿De dónde eres?" and "¿Te gusta el Ecuador?" early on. Saying you find it "chévere" or "lindo" goes a long way. Note many say "el Ecuador" with the article.',
+  dialogue: [
+    { id: 'c-1', speaker: 'them', es: '¿De dónde eres?', en: 'Where are you from?' },
+    { id: 'c-2', speaker: 'you', es: 'Soy de Estados Unidos, de California.', en: 'I\'m from the United States, from California.' },
+    { id: 'c-3', speaker: 'them', es: '¡Qué bueno! ¿A qué te dedicas?', en: 'How nice! What do you do (for work)?' },
+    { id: 'c-4', speaker: 'you', es: 'Trabajo en tecnología. ¿Y tú?', en: 'I work in tech. And you?' },
+    { id: 'c-5', speaker: 'them', es: 'Soy profesora. ¿Y te gusta el Ecuador?', en: 'I\'m a teacher. And do you like Ecuador?' },
+    { id: 'c-6', speaker: 'you', es: 'Me encanta. La gente es muy amable.', en: 'I love it. The people are very kind.' },
+    { id: 'c-7', speaker: 'them', es: '¡Qué chévere! Bienvenido.', en: 'How cool! Welcome.' },
+  ],
+  chunks: [
+    { id: 'c-c1', es: '¿De dónde eres?', en: 'Where are you from?' },
+    { id: 'c-c2', es: 'Soy de…', en: 'I\'m from…' },
+    { id: 'c-c3', es: '¿A qué te dedicas?', en: 'What do you do (for work)?' },
+    { id: 'c-c4', es: 'Me encanta', en: 'I love it' },
+    { id: 'c-c5', es: 'La gente es muy amable', en: 'The people are very kind' },
+  ],
+  vocab: [
+    { id: 'c-v1', es: 'dónde', en: 'where', pos: 'adv.' },
+    { id: 'c-v2', es: 'trabajar', en: 'to work', pos: 'v.' },
+    { id: 'c-v3', es: 'la gente', en: 'people', pos: 'n.' },
+    { id: 'c-v4', es: 'amable', en: 'kind / friendly', pos: 'adj.' },
+    { id: 'c-v5', es: 'lindo', en: 'lovely / pretty', pos: 'adj.' },
+    { id: 'c-v6', es: 'gustar', en: 'to please (to like)', pos: 'v.' },
+    { id: 'c-v7', es: 'bienvenido', en: 'welcome', pos: 'adj.' },
+  ],
+  grammarNote: '"Me gusta / me encanta" literally mean "it pleases me / it delights me", so the thing liked is the subject: "me gusta el café" (coffee pleases me). For plurals: "me gustan los tacos". "Me encanta" is a stronger, very natural way to say you love something.',
+  roleplay: [
+    {
+      id: 'c-r1',
+      prompt: '¿De dónde eres?',
+      promptEn: 'Where are you from?',
+      accept: ['soy de estados unidos', 'soy de california', 'soy de estados unidos de california'],
+      hint: 'Use "Soy de…" + your country/city.',
+    },
+    {
+      id: 'c-r2',
+      prompt: '¿A qué te dedicas?',
+      promptEn: 'What do you do for work?',
+      accept: ['trabajo en tecnologia', 'trabajo en tecnologia y tu', 'soy ingeniero'],
+      hint: 'Use "Trabajo en…" + your field.',
+    },
+    {
+      id: 'c-r3',
+      prompt: '¿Y te gusta el Ecuador?',
+      promptEn: 'And do you like Ecuador?',
+      accept: ['me encanta la gente es muy amable', 'me encanta', 'si me encanta'],
+      hint: 'Say you love it; the people are kind.',
+    },
+  ],
+  shadowing: ['c-2', 'c-4', 'c-6'],
+}

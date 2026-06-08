@@ -41,4 +41,35 @@ It is a **single shareable link**. Open it in any browser, on phone or laptop, s
 
 ## Status
 
-**Plan only.** No application code has been written yet — this is the proposal for your approval. Once you approve (or tweak) the protocol and architecture below, the build proceeds milestone by milestone per the roadmap.
+**Working MVP built** (Vite + Vue 3 + TS). Implemented so far:
+
+- The full daily loop: scenario **intro → learn → speak (roleplay) → listening gym → cool-down**
+- **FSRS-lite** spaced-repetition engine with comprehension + production cards
+- **Speaking & listening** via the Web Speech API (TTS + on-device recognition), with a self-grading fallback where recognition isn't supported
+- **Six Ecuador-flavored scenarios** (Tier 1 Survival + a Tier 2 taster): greetings, the *almuerzo*, the market, the corner store, taxis, and small talk
+- Progress dashboard (measured in *situations you can hold*, not points), calm/editorial non-gamified UI, and on-device data with export/import
+
+Next per the roadmap: more Tier 2–3 content, optional PWA/offline.
+
+## Run it locally
+
+```bash
+cd michelle
+npm install      # isolated from Sink's pnpm workspace
+npm run dev      # http://localhost:5173
+```
+
+## Make it a shareable link
+
+```bash
+npm run build    # outputs a self-contained static site to michelle/dist/
+```
+
+`dist/` uses a **relative base + hash routing**, so it works on *any* static host — no server rewrite rules, no GitHub/Cloudflare lock-in:
+
+- **Netlify / Vercel:** drag-and-drop the `dist/` folder, or connect the repo. You get an HTTPS link instantly.
+- **Any web space / S3 / local:** just upload (or open) `dist/index.html`.
+
+Anyone who opens the link gets their own independent on-device progress. No login, no extension, no app store.
+
+> **Best in Chrome/Edge** for full speaking practice — speech *recognition* is Chromium/Safari-only. Text-to-speech and everything else works in all modern browsers; where recognition is missing, roleplay falls back to "say it, reveal, self-grade".
