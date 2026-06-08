@@ -1,9 +1,14 @@
 import type { Scenario } from '@/content/types'
 import { almuerzo } from '@/content/es/almuerzo'
 import { charla } from '@/content/es/charla'
+import { clima } from '@/content/es/clima'
+import { direcciones } from '@/content/es/direcciones'
 import { farmacia } from '@/content/es/farmacia'
 import { greetings } from '@/content/es/greetings'
+import { hotel } from '@/content/es/hotel'
 import { mercado } from '@/content/es/mercado'
+import { numeros } from '@/content/es/numeros'
+import { pasado } from '@/content/es/pasado'
 import { planes } from '@/content/es/planes'
 import { taxi } from '@/content/es/taxi'
 import { tienda } from '@/content/es/tienda'
@@ -13,12 +18,17 @@ import { tienda } from '@/content/es/tienda'
 export const scenarios: Scenario[] = [
   greetings,
   almuerzo,
+  numeros,
   mercado,
   tienda,
+  direcciones,
   taxi,
   charla,
   planes,
+  clima,
+  hotel,
   farmacia,
+  pasado,
 ]
 
 export function getScenario(id: string): Scenario | undefined {

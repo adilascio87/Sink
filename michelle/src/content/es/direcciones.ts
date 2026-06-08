@@ -1,0 +1,60 @@
+import type { Scenario } from '@/content/types'
+
+export const direcciones: Scenario = {
+  id: 'direcciones',
+  tier: 1,
+  cefr: 'A1',
+  title: 'Pedir indicaciones',
+  goal: 'Ask where something is on foot, and understand simple directions.',
+  culture: 'In Ecuador distance is counted in "cuadras" (city blocks). "¿Dónde queda…?" is the natural way to ask where a place is. "A la vuelta" means "just around the corner".',
+  dialogue: [
+    { id: 'd-1', speaker: 'you', es: 'Disculpe, ¿dónde queda el banco?', en: 'Excuse me, where is the bank?' },
+    { id: 'd-2', speaker: 'them', es: 'Está a dos cuadras, por allá.', en: 'It\'s two blocks away, over there.' },
+    { id: 'd-3', speaker: 'you', es: '¿Sigo derecho?', en: 'Do I keep going straight?' },
+    { id: 'd-4', speaker: 'them', es: 'Sí, siga derecho y doble a la izquierda.', en: 'Yes, go straight and turn left.' },
+    { id: 'd-5', speaker: 'you', es: '¿Está lejos?', en: 'Is it far?' },
+    { id: 'd-6', speaker: 'them', es: 'No, está cerca, a la vuelta.', en: 'No, it\'s close, just around the corner.' },
+    { id: 'd-7', speaker: 'you', es: 'Muchas gracias.', en: 'Thank you very much.' },
+  ],
+  chunks: [
+    { id: 'd-c1', es: '¿Dónde queda…?', en: 'Where is…? (located)' },
+    { id: 'd-c2', es: 'a dos cuadras', en: 'two blocks away' },
+    { id: 'd-c3', es: '¿Está lejos?', en: 'Is it far?' },
+    { id: 'd-c4', es: 'está cerca', en: 'it\'s close' },
+    { id: 'd-c5', es: 'doble a la izquierda', en: 'turn left' },
+  ],
+  vocab: [
+    { id: 'd-v1', es: 'la cuadra', en: 'block', pos: 'n.' },
+    { id: 'd-v2', es: 'lejos', en: 'far', pos: 'adv.' },
+    { id: 'd-v3', es: 'cerca', en: 'close / near', pos: 'adv.' },
+    { id: 'd-v4', es: 'doblar', en: 'to turn', pos: 'v.' },
+    { id: 'd-v5', es: 'el banco', en: 'bank', pos: 'n.' },
+    { id: 'd-v6', es: 'allá', en: 'over there', pos: 'adv.' },
+    { id: 'd-v7', es: 'la vuelta', en: 'the turn / corner', pos: 'n.' },
+  ],
+  grammarNote: '"Quedar" is used for where things are located: "¿Dónde queda el baño?" (where\'s the bathroom?). Directions you\'ll hear as polite (usted) commands: "siga" (continue), "doble" (turn), "cruce" (cross). Pair with "a la derecha / a la izquierda" (to the right / left).',
+  roleplay: [
+    {
+      id: 'd-r1',
+      prompt: '¿Le ayudo en algo?',
+      promptEn: 'Can I help you with something?',
+      accept: ['donde queda el banco', 'disculpe donde queda el banco', 'donde queda el banco por favor'],
+      hint: 'Ask where the bank is.',
+    },
+    {
+      id: 'd-r2',
+      prompt: 'Está a dos cuadras, por allá.',
+      promptEn: 'It\'s two blocks away, over there.',
+      accept: ['esta lejos', 'sigo derecho', 'esta lejos sigo derecho'],
+      hint: 'Ask if it\'s far, or if you keep straight.',
+    },
+    {
+      id: 'd-r3',
+      prompt: 'No, está cerca, a la vuelta.',
+      promptEn: 'No, it\'s close, around the corner.',
+      accept: ['muchas gracias', 'gracias', 'muchas gracias muy amable'],
+      hint: 'Thank them.',
+    },
+  ],
+  shadowing: ['d-1', 'd-3', 'd-5'],
+}

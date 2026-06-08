@@ -1,0 +1,61 @@
+import type { Scenario } from '@/content/types'
+
+export const numeros: Scenario = {
+  id: 'numeros',
+  tier: 1,
+  cefr: 'A1',
+  title: 'Números y la hora',
+  goal: 'Ask the time and a price, and understand numbers — at a bus station.',
+  culture: 'Intercity buses are how most Ecuadorians travel. The ticket is "el pasaje". Times are usually given on the hour with "y media" (half past) or "y cuarto" (quarter past).',
+  dialogue: [
+    { id: 'n-1', speaker: 'you', es: 'Disculpe, ¿a qué hora sale el bus a Quito?', en: 'Excuse me, what time does the bus to Quito leave?' },
+    { id: 'n-2', speaker: 'them', es: 'Sale a las nueve y media.', en: 'It leaves at nine thirty.' },
+    { id: 'n-3', speaker: 'you', es: '¿Y cuánto cuesta el pasaje?', en: 'And how much is the ticket?' },
+    { id: 'n-4', speaker: 'them', es: 'Ocho dólares.', en: 'Eight dollars.' },
+    { id: 'n-5', speaker: 'you', es: '¿Cuántas horas son de viaje?', en: 'How many hours is the trip?' },
+    { id: 'n-6', speaker: 'them', es: 'Como cinco horas.', en: 'About five hours.' },
+    { id: 'n-7', speaker: 'you', es: 'Perfecto, deme un pasaje.', en: 'Perfect, give me one ticket.' },
+  ],
+  chunks: [
+    { id: 'n-c1', es: '¿A qué hora sale…?', en: 'What time does … leave?' },
+    { id: 'n-c2', es: '¿Cuánto cuesta…?', en: 'How much is…?' },
+    { id: 'n-c3', es: '¿Cuántas horas…?', en: 'How many hours…?' },
+    { id: 'n-c4', es: 'y media', en: 'half past' },
+    { id: 'n-c5', es: 'como cinco horas', en: 'about five hours' },
+  ],
+  vocab: [
+    { id: 'n-v1', es: 'el bus', en: 'bus', pos: 'n.' },
+    { id: 'n-v2', es: 'el pasaje', en: 'fare / ticket', pos: 'n.' },
+    { id: 'n-v3', es: 'el viaje', en: 'trip', pos: 'n.' },
+    { id: 'n-v4', es: 'salir', en: 'to leave / depart', pos: 'v.' },
+    { id: 'n-v5', es: 'costar', en: 'to cost', pos: 'v.' },
+    { id: 'n-v6', es: 'nueve', en: 'nine', pos: 'num.' },
+    { id: 'n-v7', es: 'cinco', en: 'five', pos: 'num.' },
+    { id: 'n-v8', es: 'ocho', en: 'eight', pos: 'num.' },
+  ],
+  grammarNote: 'Telling time: "a las" + hour, then "y media" (:30), "y cuarto" (:15), or "menos cuarto" (:45). "Como" before a number means "about / roughly": "como cinco horas", "como diez dólares". Useful numbers: uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez.',
+  roleplay: [
+    {
+      id: 'n-r1',
+      prompt: '¿A dónde va?',
+      promptEn: 'Where are you going?',
+      accept: ['a que hora sale el bus a quito', 'a quito a que hora sale', 'voy a quito a que hora sale el bus'],
+      hint: 'Ask what time the bus to Quito leaves.',
+    },
+    {
+      id: 'n-r2',
+      prompt: 'Sale a las nueve y media.',
+      promptEn: 'It leaves at nine thirty.',
+      accept: ['cuanto cuesta el pasaje', 'y cuanto cuesta el pasaje', 'cuanto cuesta'],
+      hint: 'Ask how much the ticket costs.',
+    },
+    {
+      id: 'n-r3',
+      prompt: 'Ocho dólares.',
+      promptEn: 'Eight dollars.',
+      accept: ['perfecto deme un pasaje', 'deme un pasaje', 'deme un pasaje por favor'],
+      hint: 'Ask for one ticket.',
+    },
+  ],
+  shadowing: ['n-1', 'n-3', 'n-5'],
+}

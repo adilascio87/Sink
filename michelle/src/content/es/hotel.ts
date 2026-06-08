@@ -1,0 +1,60 @@
+import type { Scenario } from '@/content/types'
+
+export const hotel: Scenario = {
+  id: 'hotel',
+  tier: 3,
+  cefr: 'B1',
+  title: 'En el hospedaje',
+  goal: 'Check in: confirm your booking, choose a room, and ask the essentials.',
+  culture: 'Budget lodging in Ecuador is often a "hostal" or "hospedaje". "La clave" almost always means the wifi password. Breakfast ("el desayuno") is frequently included.',
+  dialogue: [
+    { id: 'h-1', speaker: 'them', es: 'Buenas, ¿tiene reservación?', en: 'Hello, do you have a reservation?' },
+    { id: 'h-2', speaker: 'you', es: 'Sí, a nombre de Alex. Una habitación para dos noches.', en: 'Yes, under the name Alex. A room for two nights.' },
+    { id: 'h-3', speaker: 'them', es: 'Perfecto. ¿Habitación simple o doble?', en: 'Perfect. Single or double room?' },
+    { id: 'h-4', speaker: 'you', es: 'Simple, por favor. ¿Tiene wifi?', en: 'Single, please. Do you have wifi?' },
+    { id: 'h-5', speaker: 'them', es: 'Sí, la clave está en la tarjeta. El desayuno es a las siete.', en: 'Yes, the password is on the card. Breakfast is at seven.' },
+    { id: 'h-6', speaker: 'you', es: '¿A qué hora es el check out?', en: 'What time is check-out?' },
+    { id: 'h-7', speaker: 'them', es: 'A mediodía. Que descanse.', en: 'At noon. Rest well.' },
+  ],
+  chunks: [
+    { id: 'h-c1', es: '¿Tiene reservación?', en: 'Do you have a reservation?' },
+    { id: 'h-c2', es: 'a nombre de…', en: 'under the name of…' },
+    { id: 'h-c3', es: 'para dos noches', en: 'for two nights' },
+    { id: 'h-c4', es: '¿Tiene wifi?', en: 'Do you have wifi?' },
+    { id: 'h-c5', es: 'Que descanse', en: 'Rest well (polite)' },
+  ],
+  vocab: [
+    { id: 'h-v1', es: 'la habitación', en: 'room', pos: 'n.' },
+    { id: 'h-v2', es: 'la reservación', en: 'reservation', pos: 'n.' },
+    { id: 'h-v3', es: 'la noche', en: 'night', pos: 'n.' },
+    { id: 'h-v4', es: 'la clave', en: 'password', pos: 'n.' },
+    { id: 'h-v5', es: 'el desayuno', en: 'breakfast', pos: 'n.' },
+    { id: 'h-v6', es: 'mediodía', en: 'noon', pos: 'n.' },
+    { id: 'h-v7', es: 'doble', en: 'double', pos: 'adj.' },
+  ],
+  grammarNote: '"Para" expresses duration/purpose here: "para dos noches" (for two nights). "Que descanse" / "que le vaya bien" are polite well-wishes using the subjunctive — learn them as fixed phrases; you don\'t need the grammar behind them yet.',
+  roleplay: [
+    {
+      id: 'h-r1',
+      prompt: 'Buenas, ¿tiene reservación?',
+      promptEn: 'Hello, do you have a reservation?',
+      accept: ['si a nombre de alex', 'si a nombre de alex una habitacion para dos noches', 'a nombre de alex'],
+      hint: 'Confirm, give the name, mention two nights.',
+    },
+    {
+      id: 'h-r2',
+      prompt: '¿Habitación simple o doble?',
+      promptEn: 'Single or double room?',
+      accept: ['simple por favor tiene wifi', 'simple por favor', 'una simple tiene wifi'],
+      hint: 'Choose single and ask about wifi.',
+    },
+    {
+      id: 'h-r3',
+      prompt: 'El desayuno es a las siete.',
+      promptEn: 'Breakfast is at seven.',
+      accept: ['a que hora es el check out', 'perfecto a que hora es el check out', 'gracias a que hora es el checkout'],
+      hint: 'Ask what time check-out is.',
+    },
+  ],
+  shadowing: ['h-2', 'h-4', 'h-6'],
+}

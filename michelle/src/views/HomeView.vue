@@ -75,6 +75,16 @@ function start() {
       </button>
     </section>
 
+    <!-- Free practice (drill anytime, e.g. in the car) -->
+    <div v-if="srs.enrolledCount > 0" class="text-center">
+      <button
+        class="text-sm text-[var(--color-ink-soft)] underline-offset-4 hover:underline"
+        @click="router.push('/review?mode=practice')"
+      >
+        Or do a quick free practice →
+      </button>
+    </div>
+
     <!-- At a glance -->
     <section class="grid grid-cols-3 gap-3 text-center">
       <div class="card p-4">

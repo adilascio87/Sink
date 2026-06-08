@@ -1,19 +1,42 @@
 <script setup lang="ts">
 import type { Rating } from '@/lib/srs'
 import { Check } from 'lucide-vue-next'
-import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import SpeakButton from '@/components/SpeakButton.vue'
 import { findStudyItem } from '@/content/index'
 import { useSrs } from '@/stores/srs'
 
+const route = useRoute()
 const router = useRouter()
 const srs = useSrs()
 
-// Snapshot the due queue at entry so rescheduling doesn't disrupt the session.
-const queue = ref<string[]>(srs.dueCards.map(c => c.key))
-const startCount = queue.value.length
+// Two modes share this screen: scheduled "review" (SRS-graded) and "practice"
+// (free drilling of production phrases, with no effect on the schedule).
+const practice = computed(() => route.query.mode === 'practice')
+
+const queue = ref<string[]>([])
+const startCount = ref(0)
 const revealed = ref(false)
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
+function buildQueue() {
+  queue.value = practice.value
+    ? shuffle(srs.allCards.filter(c => c.type === 'production').map(c => c.key))
+    : srs.dueCards.map(c => c.key)
+  startCount.value = queue.value.length
+  revealed.value = false
+}
+buildQueue()
+watch(practice, buildQueue)
 
 const currentKey = computed(() => queue.value[0])
 const currentCard = computed(() => (currentKey.value ? srs.cards[currentKey.value] : undefined))
@@ -22,18 +45,12 @@ const currentItem = computed(() =>
 )
 
 const isProduction = computed(() => currentCard.value?.type === 'production')
+const cue = computed(() => (isProduction.value ? currentItem.value?.en : currentItem.value?.es))
+const answer = computed(() => (isProduction.value ? currentItem.value?.es : currentItem.value?.en))
 
-// Front shows the cue; back shows the target. Production trains recall→speech.
-const cue = computed(() =>
-  isProduction.value ? currentItem.value?.en : currentItem.value?.es,
-)
-const answer = computed(() =>
-  isProduction.value ? currentItem.value?.es : currentItem.value?.en,
-)
-
-const reviewedCount = computed(() => startCount - queue.value.length)
+const reviewedCount = computed(() => startCount.value - queue.value.length)
 const progressPct = computed(() =>
-  startCount === 0 ? 100 : Math.round((reviewedCount.value / startCount) * 100),
+  startCount.value === 0 ? 100 : Math.round((reviewedCount.value / startCount.value) * 100),
 )
 
 const ratings: { rating: Rating, label: string }[] = [
@@ -43,23 +60,26 @@ const ratings: { rating: Rating, label: string }[] = [
   { rating: 'easy', label: 'Easy' },
 ]
 
-function grade(rating: Rating) {
+function advance(repeat: boolean) {
   const key = currentKey.value
   if (!key)
     return
-  srs.grade(key, rating)
   queue.value.shift()
-  // A lapse comes back later in the same session.
-  if (rating === 'again')
+  if (repeat)
     queue.value.push(key)
   revealed.value = false
+}
+
+function grade(rating: Rating) {
+  srs.grade(currentKey.value!, rating)
+  advance(rating === 'again')
 }
 </script>
 
 <template>
   <div class="space-y-6">
     <header class="flex items-center justify-between">
-      <h1 class="text-2xl">Review</h1>
+      <h1 class="text-2xl">{{ practice ? 'Free practice' : 'Review' }}</h1>
       <span class="text-sm text-[var(--color-muted)]">{{ reviewedCount }} / {{ startCount }}</span>
     </header>
 
@@ -72,13 +92,28 @@ function grade(rating: Rating) {
       <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--color-sage)] text-white">
         <Check class="size-7" />
       </div>
-      <h2 class="text-xl">Nothing due right now</h2>
+      <h2 class="text-xl">{{ practice ? 'All done' : 'Nothing due right now' }}</h2>
       <p class="text-[var(--color-ink-soft)]">
-        Your memory is fresh. Learn a new situation or come back later.
+        <template v-if="srs.enrolledCount === 0">
+          Learn a situation first — your phrases will show up here to practice.
+        </template>
+        <template v-else-if="practice">
+          You went through every phrase. Come back any time to drill again.
+        </template>
+        <template v-else>
+          Your memory is fresh. Learn a new situation, or do some free practice.
+        </template>
       </p>
-      <div class="flex justify-center gap-2">
+      <div class="flex flex-wrap justify-center gap-2">
         <button class="btn btn-ghost" @click="router.push('/library')">Library</button>
-        <button class="btn btn-primary" @click="router.push('/')">Home</button>
+        <button
+          v-if="!practice && srs.enrolledCount > 0"
+          class="btn btn-primary"
+          @click="router.push('/review?mode=practice')"
+        >
+          Free practice
+        </button>
+        <button v-else class="btn btn-primary" @click="router.push('/')">Home</button>
       </div>
     </div>
 
@@ -100,7 +135,15 @@ function grade(rating: Rating) {
             <SpeakButton :text="isProduction ? (answer ?? '') : (currentItem?.es ?? '')" label="Listen" />
           </div>
         </div>
-        <div>
+
+        <!-- practice: simple advance, no scheduling -->
+        <div v-if="practice" class="flex justify-center gap-2">
+          <button class="btn btn-ghost" @click="advance(true)">Practice again</button>
+          <button class="btn btn-primary" @click="advance(false)">Next</button>
+        </div>
+
+        <!-- review: SRS grading -->
+        <div v-else>
           <p class="mb-2 text-xs text-[var(--color-muted)]">How well did you recall it?</p>
           <div class="grid grid-cols-4 gap-2">
             <button

@@ -46,10 +46,11 @@ It is a **single self-contained file**. Double-click it and it opens in your bro
 - The full daily loop: scenario **intro → learn → speak (roleplay) → listening gym → cool-down**
 - **FSRS-lite** spaced-repetition engine with comprehension + production cards
 - **Speaking & listening** via the Web Speech API (TTS + on-device recognition), with a self-grading fallback where recognition isn't supported
-- **Eight Ecuador-flavored scenarios** across Tiers 1–3: greetings, the *almuerzo*, the market, the corner store, taxis, small talk, making plans, and the pharmacy
+- **Thirteen Ecuador-flavored scenarios** across all four tiers: greetings, the *almuerzo*, numbers & time, the market, the corner store, asking directions, taxis, small talk, making plans, weather & feelings, lodging check-in, the pharmacy, and talking about the past
+- **Free-practice mode** — drill your production phrases any time (no schedule impact), e.g. in the car
 - Progress dashboard (measured in *situations you can hold*, not points), a clean near-monochrome non-gamified UI, and on-device data with export/import
 
-Next per the roadmap: more Tier 2–3 content, a hide-English challenge mode, optional offline/installable polish.
+Next per the roadmap: deeper Tier 3–4 content, a hide-English challenge toggle in lessons, optional installable polish.
 
 ## Use it — no hosting required
 
