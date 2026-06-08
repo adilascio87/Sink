@@ -36,6 +36,7 @@ It is a **single self-contained file**. Double-click it and it opens in your bro
 - **[docs/PROTOCOL.md](docs/PROTOCOL.md)** — the learning methodology, the daily loop, and the curriculum structure
 - **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — tech stack, data model, screens, and how it ships as a shareable link
 - **[docs/ROADMAP.md](docs/ROADMAP.md)** — milestones from skeleton to first Spanish content pack to deploy
+- **[docs/METHODS.md](docs/METHODS.md)** — the evidence-based techniques Michelle draws from (Krashen, spaced repetition, Pimsleur, Michel Thomas, shadowing) and where each lives in the app
 
 ---
 
@@ -46,7 +47,8 @@ It is a **single self-contained file**. Double-click it and it opens in your bro
 - The full daily loop: scenario **intro → learn → speak (roleplay) → listening gym → cool-down**
 - **FSRS-lite** spaced-repetition engine with comprehension + production cards
 - **Speaking & listening** via the Web Speech API (TTS + on-device recognition), with a self-grading fallback where recognition isn't supported
-- **Thirteen Ecuador-flavored scenarios** across all four tiers: greetings, the *almuerzo*, numbers & time, the market, the corner store, asking directions, taxis, small talk, making plans, weather & feelings, lodging check-in, the pharmacy, and talking about the past
+- **Eighteen Ecuador-flavored scenarios** across all four tiers, including a **"family & connection" cluster** built for the real goal — talking with relatives: talking about your family, meeting relatives, the *sobremesa*, a phone call with grandma, and expressing affection/missing people
+- **Sentence Builder** — learn a productive frame ("Quiero ___", "¿Me puedes pasar ___?") and swap the ending to *generate your own* sentences (Michel Thomas + Pimsleur-inspired); see [docs/METHODS.md](docs/METHODS.md)
 - **Free-practice mode** — drill your production phrases any time (no schedule impact), e.g. in the car
 - Progress dashboard (measured in *situations you can hold*, not points), a clean near-monochrome non-gamified UI, and on-device data with export/import
 

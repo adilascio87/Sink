@@ -9,6 +9,7 @@ const route = useRoute()
 const nav = [
   { to: '/', label: 'Today' },
   { to: '/library', label: 'Library' },
+  { to: '/builder', label: 'Build' },
   { to: '/review', label: 'Review' },
   { to: '/progress', label: 'Progress' },
 ]

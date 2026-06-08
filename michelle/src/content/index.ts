@@ -1,20 +1,26 @@
 import type { Scenario } from '@/content/types'
+import { afecto } from '@/content/es/afecto'
 import { almuerzo } from '@/content/es/almuerzo'
 import { charla } from '@/content/es/charla'
 import { clima } from '@/content/es/clima'
 import { direcciones } from '@/content/es/direcciones'
+import { familia } from '@/content/es/familia'
 import { farmacia } from '@/content/es/farmacia'
 import { greetings } from '@/content/es/greetings'
 import { hotel } from '@/content/es/hotel'
+import { llamada } from '@/content/es/llamada'
 import { mercado } from '@/content/es/mercado'
 import { numeros } from '@/content/es/numeros'
 import { pasado } from '@/content/es/pasado'
 import { planes } from '@/content/es/planes'
+import { presentar } from '@/content/es/presentar'
+import { sobremesa } from '@/content/es/sobremesa'
 import { taxi } from '@/content/es/taxi'
 import { tienda } from '@/content/es/tienda'
 
-// Scenarios ordered as a learning path across tiers. Adding a scenario is just
-// appending here — the engine is entirely content-driven.
+// Scenarios ordered as a learning path across tiers. The "family & connection"
+// cluster (familia → sobremesa) is the heart of the app's purpose: real
+// conversation with relatives. Adding a scenario is just appending here.
 export const scenarios: Scenario[] = [
   greetings,
   almuerzo,
@@ -26,6 +32,11 @@ export const scenarios: Scenario[] = [
   charla,
   planes,
   clima,
+  familia,
+  presentar,
+  llamada,
+  afecto,
+  sobremesa,
   hotel,
   farmacia,
   pasado,

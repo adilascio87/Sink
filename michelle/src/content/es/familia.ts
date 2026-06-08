@@ -1,0 +1,60 @@
+import type { Scenario } from '@/content/types'
+
+export const familia: Scenario = {
+  id: 'familia',
+  tier: 2,
+  cefr: 'A2',
+  title: 'Hablar de tu familia',
+  goal: 'Talk about your siblings and parents, and say you miss them.',
+  culture: 'Family is the center of Ecuadorian life, so these questions come up fast and warmly. "Los papás" means "parents" (not just dads). "Extrañar" is the Latin American verb for "to miss" (Spain uses "echar de menos").',
+  dialogue: [
+    { id: 'fa-1', speaker: 'them', es: '¿Tienes hermanos?', en: 'Do you have siblings?' },
+    { id: 'fa-2', speaker: 'you', es: 'Sí, tengo un hermano y una hermana.', en: 'Yes, I have a brother and a sister.' },
+    { id: 'fa-3', speaker: 'them', es: '¿Y son mayores o menores?', en: 'And are they older or younger?' },
+    { id: 'fa-4', speaker: 'you', es: 'Mi hermano es mayor y mi hermana es menor.', en: 'My brother is older and my sister is younger.' },
+    { id: 'fa-5', speaker: 'them', es: '¿Tus papás viven aquí?', en: 'Do your parents live here?' },
+    { id: 'fa-6', speaker: 'you', es: 'No, viven en Estados Unidos. Los extraño mucho.', en: 'No, they live in the US. I miss them a lot.' },
+    { id: 'fa-7', speaker: 'them', es: 'Claro, la familia siempre hace falta.', en: 'Of course, you always miss family.' },
+  ],
+  chunks: [
+    { id: 'fa-c1', es: '¿Tienes hermanos?', en: 'Do you have siblings?' },
+    { id: 'fa-c2', es: 'tengo un hermano', en: 'I have a brother' },
+    { id: 'fa-c3', es: 'mayor o menor', en: 'older or younger' },
+    { id: 'fa-c4', es: '¿Tus papás viven aquí?', en: 'Do your parents live here?' },
+    { id: 'fa-c5', es: 'Los extraño mucho', en: 'I miss them a lot' },
+  ],
+  vocab: [
+    { id: 'fa-v1', es: 'el hermano', en: 'brother', pos: 'n.' },
+    { id: 'fa-v2', es: 'la hermana', en: 'sister', pos: 'n.' },
+    { id: 'fa-v3', es: 'los papás', en: 'parents', pos: 'n.' },
+    { id: 'fa-v4', es: 'mayor', en: 'older', pos: 'adj.' },
+    { id: 'fa-v5', es: 'menor', en: 'younger', pos: 'adj.' },
+    { id: 'fa-v6', es: 'vivir', en: 'to live', pos: 'v.' },
+    { id: 'fa-v7', es: 'extrañar', en: 'to miss', pos: 'v.' },
+  ],
+  grammarNote: '"Tener" carries relationships: "tengo dos hermanos", "tengo una hija". For age comparison, Spanish uses "mayor" (older) and "menor" (younger) rather than "más viejo/joven" for people. Object pronouns sit before the verb: "los extraño" (I miss them), "te extraño" (I miss you).',
+  roleplay: [
+    {
+      id: 'fa-r1',
+      prompt: '¿Tienes hermanos?',
+      promptEn: 'Do you have siblings?',
+      accept: ['si tengo un hermano y una hermana', 'tengo un hermano y una hermana', 'si tengo dos hermanos'],
+      hint: 'Say how many brothers/sisters you have.',
+    },
+    {
+      id: 'fa-r2',
+      prompt: '¿Tus papás viven aquí?',
+      promptEn: 'Do your parents live here?',
+      accept: ['no viven en estados unidos los extraño mucho', 'no viven en estados unidos', 'no los extraño mucho'],
+      hint: 'Say where they live and that you miss them.',
+    },
+    {
+      id: 'fa-r3',
+      prompt: 'Claro, la familia siempre hace falta.',
+      promptEn: 'Of course, you always miss family.',
+      accept: ['si bastante', 'asi es', 'si la verdad'],
+      hint: 'Agree warmly.',
+    },
+  ],
+  shadowing: ['fa-2', 'fa-4', 'fa-6'],
+}
