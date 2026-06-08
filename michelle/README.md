@@ -52,7 +52,8 @@ It is a **single self-contained file**. Double-click it and it opens in your bro
 - **Conversation mode** — run a whole scenario end-to-end as a continuous back-and-forth where you speak every one of your lines (the closest practice to a real chat)
 - **Guided 7-day starter path** — an opinionated sequence from your first "hola" to holding a family conversation, so there's always a clear next step
 - **Sounds** — pronunciation focus on the sounds that decide whether you're understood (pure vowels, the tap/trill r, ñ, throaty j, soft d, b=v, silent h, seseo), with minimal pairs
-- **Vocabulary** — 15 thematic word packs (family, school, daily routine, house, food, body & health, clothing & colors, hobbies, jobs, the city, technology, nature, descriptions, emotions, calendar) you can browse, hear, and send into spaced repetition
+- **Tenses (Conjugation Trainer)** — the centerpiece for the hardest part: plain "when to use it" guidance per tense, a **typed production drill** (type the form, instant check, hear it) powered by a regular+irregular conjugation engine across many verbs, and a dedicated **preterite-vs-imperfect** chooser with explanations
+- **Vocabulary** — 19 thematic word packs (family, school, daily routine, house, food, body & health, clothing & colors, hobbies, jobs, the city, technology, nature, descriptions, emotions, calendar, numbers, common verbs, travel, question words & connectors) you can browse, hear, and send into spaced repetition
 - **Key verbs** — the eight highest-frequency verbs across **five tenses** (present, preterite, imperfect, future, conditional), with reference tables and an active-recall **quiz** over every verb/tense/form
 - **Phrasebook** — every key phrase in one searchable, tap-to-hear list
 - **Free-practice mode** + an in-lesson **"ES only" challenge toggle** (hide English to force recall)

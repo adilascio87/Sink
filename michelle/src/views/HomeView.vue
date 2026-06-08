@@ -25,6 +25,7 @@ const greeting = computed(() => {
 })
 
 const tools = [
+  { to: '/conjugation', label: 'Tenses', desc: 'Master past, present & future' },
   { to: '/vocabulary', label: 'Vocabulary', desc: 'Words by topic, into review' },
   { to: '/builder', label: 'Sentence builder', desc: 'Build your own sentences' },
   { to: '/verbs', label: 'Key verbs', desc: 'Conjugations & a quiz' },
