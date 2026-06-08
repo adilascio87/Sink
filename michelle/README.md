@@ -49,6 +49,8 @@ It is a **single self-contained file**. Double-click it and it opens in your bro
 - **Speaking & listening** via the Web Speech API (TTS + on-device recognition), with a self-grading fallback where recognition isn't supported
 - **Twenty Ecuador-flavored scenarios** across all four tiers, including a **"family & connection" cluster** built for the real goal — talking with relatives: family, meeting relatives, the *sobremesa*, a call with grandma, affection/goodbyes, catching up on news, and giving opinions warmly
 - **Sentence Builder** — learn a productive frame ("Quiero ___", "¿Me puedes pasar ___?") and swap the ending to *generate your own* sentences (Michel Thomas + Pimsleur-inspired); its frames can be added into spaced repetition too. See [docs/METHODS.md](docs/METHODS.md)
+- **Sounds** — pronunciation focus on the sounds that decide whether you're understood (pure vowels, the tap/trill r, ñ, throaty j, soft d, b=v, silent h, seseo), with minimal pairs
+- **Key verbs** — hear-and-repeat present-tense drills for the eight verbs that unlock most speech (ser, estar, tener, ir, hacer, querer, poder, gustar)
 - **Phrasebook** — every key phrase in one searchable, tap-to-hear list
 - **Free-practice mode** + an in-lesson **"ES only" challenge toggle** (hide English to force recall)
 - Progress dashboard (measured in *situations you can hold*, not points), a clean near-monochrome non-gamified UI, and on-device data with export/import

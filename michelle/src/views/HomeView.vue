@@ -24,6 +24,13 @@ const greeting = computed(() => {
   return 'Buenas noches'
 })
 
+const tools = [
+  { to: '/builder', label: 'Sentence builder', desc: 'Build your own sentences' },
+  { to: '/verbs', label: 'Key verbs', desc: 'The 8 that unlock most speech' },
+  { to: '/pronunciation', label: 'Sounds', desc: 'Be understood clearly' },
+  { to: '/phrasebook', label: 'Phrasebook', desc: 'Every phrase, tap to hear' },
+]
+
 function start() {
   router.push(`/scenario/${nextScenario.value.id}`)
 }
@@ -84,6 +91,22 @@ function start() {
         Or do a quick free practice →
       </button>
     </div>
+
+    <!-- Sharpen your speaking -->
+    <section>
+      <h2 class="mb-2 text-sm font-medium uppercase tracking-wide text-[var(--color-muted)]">Sharpen your speaking</h2>
+      <div class="grid grid-cols-2 gap-3">
+        <button
+          v-for="tool in tools"
+          :key="tool.to"
+          class="card p-4 text-left transition-shadow hover:shadow-sm"
+          @click="router.push(tool.to)"
+        >
+          <p class="font-medium">{{ tool.label }}</p>
+          <p class="mt-0.5 text-xs text-[var(--color-muted)]">{{ tool.desc }}</p>
+        </button>
+      </div>
+    </section>
 
     <!-- At a glance -->
     <section class="grid grid-cols-3 gap-3 text-center">
