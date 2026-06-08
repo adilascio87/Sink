@@ -45,6 +45,12 @@ function start() {
         One focused session: review what's fading, learn a real situation, and
         <em>say it out loud</em>. No streaks to protect — just Spanish you can use.
       </p>
+      <button
+        class="mt-3 text-sm text-[var(--color-ink-soft)] underline-offset-4 hover:underline"
+        @click="router.push('/plan')"
+      >
+        New here? Follow the 7-day starter path →
+      </button>
     </section>
 
     <!-- Review due -->

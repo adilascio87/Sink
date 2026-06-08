@@ -8,6 +8,7 @@ export const router = createRouter({
   routes: [
     { path: '/', name: 'home', component: () => import('@/views/HomeView.vue') },
     { path: '/library', name: 'library', component: () => import('@/views/LibraryView.vue') },
+    { path: '/plan', name: 'plan', component: () => import('@/views/PlanView.vue') },
     { path: '/builder', name: 'builder', component: () => import('@/views/BuilderView.vue') },
     { path: '/phrasebook', name: 'phrasebook', component: () => import('@/views/PhrasebookView.vue') },
     { path: '/verbs', name: 'verbs', component: () => import('@/views/VerbsView.vue') },
