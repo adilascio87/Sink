@@ -1,0 +1,60 @@
+import type { Scenario } from '@/content/types'
+
+export const farmacia: Scenario = {
+  id: 'farmacia',
+  tier: 3,
+  cefr: 'B1',
+  title: 'En la farmacia',
+  goal: 'Describe a symptom, ask for something to treat it, and understand the dosage.',
+  culture: 'Pharmacies ("farmacias" or "boticas") are everywhere in Ecuador and pharmacists give a lot of informal advice. Many common medicines are available without a prescription ("sin receta"). You\'ll be asked "¿cada cuánto?" — how often to take it.',
+  dialogue: [
+    { id: 'f-1', speaker: 'them', es: 'Buenas, ¿en qué le puedo ayudar?', en: 'Hello, how can I help you?' },
+    { id: 'f-2', speaker: 'you', es: 'Me duele la cabeza. ¿Tiene algo para el dolor?', en: 'I have a headache. Do you have something for the pain?' },
+    { id: 'f-3', speaker: 'them', es: 'Sí, esto le va a ayudar. ¿Tiene receta?', en: 'Yes, this will help you. Do you have a prescription?' },
+    { id: 'f-4', speaker: 'you', es: 'No, ¿se puede sin receta?', en: 'No, can I get it without a prescription?' },
+    { id: 'f-5', speaker: 'them', es: 'Claro. Tome una pastilla cada ocho horas.', en: 'Of course. Take one pill every eight hours.' },
+    { id: 'f-6', speaker: 'you', es: 'Entendido. ¿Cuánto le debo?', en: 'Understood. How much do I owe you?' },
+    { id: 'f-7', speaker: 'them', es: 'Tres dólares con cincuenta.', en: 'Three dollars fifty.' },
+  ],
+  chunks: [
+    { id: 'f-c1', es: 'Me duele…', en: 'My … hurts / I have a … ache' },
+    { id: 'f-c2', es: '¿Tiene algo para…?', en: 'Do you have something for…?' },
+    { id: 'f-c3', es: '¿Se puede sin receta?', en: 'Can I get it without a prescription?' },
+    { id: 'f-c4', es: 'cada ocho horas', en: 'every eight hours' },
+    { id: 'f-c5', es: 'Entendido', en: 'Understood / got it' },
+  ],
+  vocab: [
+    { id: 'f-v1', es: 'la cabeza', en: 'head', pos: 'n.' },
+    { id: 'f-v2', es: 'el dolor', en: 'pain', pos: 'n.' },
+    { id: 'f-v3', es: 'la pastilla', en: 'pill', pos: 'n.' },
+    { id: 'f-v4', es: 'la receta', en: 'prescription', pos: 'n.' },
+    { id: 'f-v5', es: 'doler', en: 'to hurt', pos: 'v.' },
+    { id: 'f-v6', es: 'el estómago', en: 'stomach', pos: 'n.' },
+    { id: 'f-v7', es: 'la garganta', en: 'throat', pos: 'n.' },
+  ],
+  grammarNote: '"Doler" works like "gustar": the body part is the subject. "Me duele la cabeza" = "the head hurts to me". Plural body parts take "duelen": "me duelen los pies" (my feet hurt). Swap "me" for "le" to ask about someone else: "¿Le duele algo?"',
+  roleplay: [
+    {
+      id: 'f-r1',
+      prompt: 'Buenas, ¿en qué le puedo ayudar?',
+      promptEn: 'Hello, how can I help you?',
+      accept: ['me duele la cabeza tiene algo para el dolor', 'me duele la cabeza', 'tiene algo para el dolor de cabeza'],
+      hint: 'Say your head hurts and ask for something for the pain.',
+    },
+    {
+      id: 'f-r2',
+      prompt: '¿Tiene receta?',
+      promptEn: 'Do you have a prescription?',
+      accept: ['no se puede sin receta', 'no se puede sin receta', 'no tiene algo sin receta'],
+      hint: 'Say no, and ask if it\'s available without one.',
+    },
+    {
+      id: 'f-r3',
+      prompt: 'Tome una pastilla cada ocho horas.',
+      promptEn: 'Take one pill every eight hours.',
+      accept: ['entendido cuanto le debo', 'entendido', 'entendido cuanto es'],
+      hint: 'Acknowledge and ask the price.',
+    },
+  ],
+  shadowing: ['f-2', 'f-4', 'f-6'],
+}

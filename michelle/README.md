@@ -4,7 +4,7 @@
 
 Michelle is a deliberate reaction against the language apps that have failed most people: the ones that feel like slot machines, reward tapping over talking, and leave you with 400-day streaks but unable to order a coffee. The single goal here is **strong, confident conversational Spanish** — the ability to understand and be understood in real situations — not paper "fluency," not grammar-exam mastery, not points.
 
-It is a **single shareable link**. Open it in any browser, on phone or laptop, send it to a friend. No extension, no app store, no login required, no backend. Everything runs client-side and saves to your device.
+It is a **single self-contained file**. Double-click it and it opens in your browser — on a laptop or a phone. No hosting, no server, no extension, no app store, no login, no backend. Everything runs in the browser and saves to your device.
 
 ---
 
@@ -46,30 +46,36 @@ It is a **single shareable link**. Open it in any browser, on phone or laptop, s
 - The full daily loop: scenario **intro → learn → speak (roleplay) → listening gym → cool-down**
 - **FSRS-lite** spaced-repetition engine with comprehension + production cards
 - **Speaking & listening** via the Web Speech API (TTS + on-device recognition), with a self-grading fallback where recognition isn't supported
-- **Six Ecuador-flavored scenarios** (Tier 1 Survival + a Tier 2 taster): greetings, the *almuerzo*, the market, the corner store, taxis, and small talk
-- Progress dashboard (measured in *situations you can hold*, not points), calm/editorial non-gamified UI, and on-device data with export/import
+- **Eight Ecuador-flavored scenarios** across Tiers 1–3: greetings, the *almuerzo*, the market, the corner store, taxis, small talk, making plans, and the pharmacy
+- Progress dashboard (measured in *situations you can hold*, not points), a clean near-monochrome non-gamified UI, and on-device data with export/import
 
-Next per the roadmap: more Tier 2–3 content, optional PWA/offline.
+Next per the roadmap: more Tier 2–3 content, a hide-English challenge mode, optional offline/installable polish.
 
-## Run it locally
+## Use it — no hosting required
+
+The whole app is pre-built into one file you can just open:
+
+**[`standalone/michelle.html`](standalone/michelle.html)** — download it and **double-click**. It opens in your default browser and runs entirely offline.
+
+### Put it on your desktop as an icon
+- **macOS:** drag `michelle.html` to your Desktop (or Dock). Double-click opens it in your browser. To make it feel like an app, open it in Chrome → ⋮ menu → *Cast, save & share* → *Install page as app…* (creates a real Dock icon in its own window).
+- **Windows:** right-click `michelle.html` → *Send to* → *Desktop (create shortcut)*. Or open in Chrome/Edge → ⋮ → *Install Michelle* for a Start-menu app.
+
+### Use it on your phone (for the car, etc.)
+1. Get the file onto the phone (AirDrop, email it to yourself, or save it to your phone's Files / Downloads).
+2. Open it with the browser. On Android Chrome you can open it from Downloads directly; on iPhone, open via the Files app → it launches in your browser.
+3. In Chrome/Safari you can then *Add to Home Screen* for a one-tap icon.
+
+> **Speaking practice is fullest in Chrome/Edge.** Text-to-speech (listening, shadowing) works everywhere. Speech *recognition* (scoring what you say) is Chromium/Safari-only and may be limited when opening a local `file://` — where it's unavailable, roleplay automatically falls back to "say it aloud, reveal, self-grade", so nothing breaks.
+
+### Does my progress sync between phone and desktop?
+**No — and that's normal.** Browser storage (localStorage/IndexedDB) is per-device and per-browser-profile; it is *not* synced by Chrome Sync or your Google account. On each device it persists across sessions indefinitely. To move progress, use **Settings → Export backup** on one device and **Import backup** on the other (a small JSON file).
+
+## Rebuild it yourself (after editing content or code)
 
 ```bash
 cd michelle
-npm install      # isolated from Sink's pnpm workspace
-npm run dev      # http://localhost:5173
+npm install               # isolated from Sink's pnpm workspace
+npm run dev               # live dev server at http://localhost:5173
+npm run build:standalone  # regenerate standalone/michelle.html
 ```
-
-## Make it a shareable link
-
-```bash
-npm run build    # outputs a self-contained static site to michelle/dist/
-```
-
-`dist/` uses a **relative base + hash routing**, so it works on *any* static host — no server rewrite rules, no GitHub/Cloudflare lock-in:
-
-- **Netlify / Vercel:** drag-and-drop the `dist/` folder, or connect the repo. You get an HTTPS link instantly.
-- **Any web space / S3 / local:** just upload (or open) `dist/index.html`.
-
-Anyone who opens the link gets their own independent on-device progress. No login, no extension, no app store.
-
-> **Best in Chrome/Edge** for full speaking practice — speech *recognition* is Chromium/Safari-only. Text-to-speech and everything else works in all modern browsers; where recognition is missing, roleplay falls back to "say it, reveal, self-grade".

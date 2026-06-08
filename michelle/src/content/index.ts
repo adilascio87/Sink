@@ -1,13 +1,15 @@
 import type { Scenario } from '@/content/types'
 import { almuerzo } from '@/content/es/almuerzo'
 import { charla } from '@/content/es/charla'
+import { farmacia } from '@/content/es/farmacia'
 import { greetings } from '@/content/es/greetings'
 import { mercado } from '@/content/es/mercado'
+import { planes } from '@/content/es/planes'
 import { taxi } from '@/content/es/taxi'
 import { tienda } from '@/content/es/tienda'
 
-// The Tier 1 "Survival" pack (plus one Tier 2 taster), ordered as a learning
-// path. Adding a scenario is just appending here — the engine is content-driven.
+// Scenarios ordered as a learning path across tiers. Adding a scenario is just
+// appending here — the engine is entirely content-driven.
 export const scenarios: Scenario[] = [
   greetings,
   almuerzo,
@@ -15,6 +17,8 @@ export const scenarios: Scenario[] = [
   tienda,
   taxi,
   charla,
+  planes,
+  farmacia,
 ]
 
 export function getScenario(id: string): Scenario | undefined {
