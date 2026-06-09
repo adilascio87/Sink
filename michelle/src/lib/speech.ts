@@ -73,7 +73,19 @@ function getRecognitionCtor(): SpeechRecognitionCtor | undefined {
 }
 
 export function recognitionSupported(): boolean {
+  // Chrome/Edge block the mic on file:// pages (no secure origin for the
+  // permission prompt), so recognition can't actually run there. Treat it as
+  // unsupported so the UI falls back to self-grading instead of erroring.
+  if (typeof window !== 'undefined' && window.location.protocol === 'file:')
+    return false
   return getRecognitionCtor() !== undefined
+}
+
+/** Why recognition is unavailable, for clear messaging in the UI. */
+export function recognitionStatus(): 'ok' | 'file' | 'unsupported' {
+  if (typeof window !== 'undefined' && window.location.protocol === 'file:')
+    return 'file'
+  return getRecognitionCtor() ? 'ok' : 'unsupported'
 }
 
 /** Listen once and resolve with the recognized Spanish transcript. */

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { exportAll, importAll } from '@/lib/db'
-import { recognitionSupported, ttsSupported } from '@/lib/speech'
+import { recognitionStatus, ttsSupported } from '@/lib/speech'
 import { useProgress } from '@/stores/progress'
 import { useSettings } from '@/stores/settings'
 import { useSrs } from '@/stores/srs'
@@ -11,7 +11,7 @@ const srs = useSrs()
 const progress = useProgress()
 
 const ttsOk = ttsSupported()
-const recogOk = recognitionSupported()
+const recogState = recognitionStatus()
 const fileInput = ref<HTMLInputElement>()
 const message = ref('')
 
@@ -86,7 +86,7 @@ function resetAll() {
           <p class="font-medium">Speech recognition</p>
           <p class="text-xs text-[var(--color-muted)]">Score spoken answers in roleplay using your mic.</p>
         </div>
-        <input v-model="settings.useRecognition" type="checkbox" class="size-5 accent-[var(--color-clay)]" :disabled="!recogOk">
+        <input v-model="settings.useRecognition" type="checkbox" class="size-5 accent-[var(--color-clay)]" :disabled="recogState !== 'ok'">
       </div>
 
       <div class="flex items-center justify-between p-4">
@@ -103,8 +103,31 @@ function resetAll() {
       <p class="font-medium text-[var(--color-ink)]">This browser</p>
       <ul class="mt-2 space-y-1">
         <li>Audio (text-to-speech): <strong>{{ ttsOk ? 'available' : 'not available' }}</strong></li>
-        <li>Microphone (speech recognition): <strong>{{ recogOk ? 'available' : 'not available — roleplay falls back to self-grading' }}</strong></li>
+        <li>
+          Microphone (speech scoring):
+          <strong v-if="recogState === 'ok'">available</strong>
+          <strong v-else-if="recogState === 'file'">off — opened as a local file</strong>
+          <strong v-else>not supported in this browser</strong>
+        </li>
       </ul>
+      <div v-if="recogState === 'file'" class="mt-3 border-t border-[var(--color-line)] pt-3">
+        <p class="font-medium text-[var(--color-ink)]">Want spoken-answer scoring?</p>
+        <p class="mt-1">
+          Browsers only allow the mic when the app is served over <code>localhost</code> or
+          <code>https</code> — not from a double-clicked file. Everything else (listening, lessons,
+          review) works as-is; speaking just falls back to “say it, then self-grade”.
+        </p>
+        <p class="mt-2">To turn the mic on, from the folder with this file run one of:</p>
+        <pre class="mt-1 overflow-x-auto rounded-lg bg-[var(--color-ink)] p-3 text-xs text-white">python3 -m http.server 8000
+# then open http://localhost:8000/michelle.html</pre>
+        <p class="mt-2">or, if you have Node:</p>
+        <pre class="mt-1 overflow-x-auto rounded-lg bg-[var(--color-ink)] p-3 text-xs text-white">npx serve
+# then open the http://localhost link it prints</pre>
+        <p class="mt-2">Use <strong>Chrome or Edge</strong> and allow the mic when asked.</p>
+      </div>
+      <p v-else-if="recogState === 'unsupported'" class="mt-2">
+        Try <strong>Chrome or Edge</strong> for spoken-answer scoring. Everything else works here.
+      </p>
     </section>
 
     <!-- data -->
