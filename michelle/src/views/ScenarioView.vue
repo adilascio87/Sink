@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import type { RoleplayStep } from '@/content/types'
-import { ArrowRight, Check, Eye, EyeOff, Lightbulb, Mic, RotateCcw, X } from 'lucide-vue-next'
+import { ArrowRight, Check, Eye, EyeOff, Lightbulb, X } from 'lucide-vue-next'
 import { computed, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import SpeakButton from '@/components/SpeakButton.vue'
 import { getScenario, studyItems } from '@/content/index'
-import { listenOnce, recognitionSupported, scoreAnswer } from '@/lib/speech'
 import { useProgress } from '@/stores/progress'
 import { useSettings } from '@/stores/settings'
 import { useSrs } from '@/stores/srs'
@@ -21,8 +20,6 @@ const settings = useSettings()
 const scenario = computed(() => getScenario(String(route.params.id)))
 const phase = ref<Phase>('intro')
 
-const canRecognize = computed(() => recognitionSupported() && settings.useRecognition)
-
 const lineById = (id: string) => scenario.value?.dialogue.find(l => l.id === id)
 const shadowLines = computed(() =>
   (scenario.value?.shadowing ?? []).map(lineById).filter((l): l is NonNullable<typeof l> => !!l),
@@ -35,39 +32,10 @@ function toInput() {
   phase.value = 'input'
 }
 
-// --- roleplay ---------------------------------------------------------------
+// --- roleplay (self-graded, no microphone) ---------------------------------
 const rpIndex = ref(0)
-const rp = reactive({
-  status: 'idle' as 'idle' | 'listening' | 'result' | 'error',
-  transcript: '',
-  score: 0,
-  revealed: false,
-})
+const rp = reactive({ revealed: false })
 const currentStep = computed<RoleplayStep | undefined>(() => scenario.value?.roleplay[rpIndex.value])
-
-function resetRp() {
-  rp.status = 'idle'
-  rp.transcript = ''
-  rp.score = 0
-  rp.revealed = false
-}
-
-async function record() {
-  const step = currentStep.value
-  if (!step || !canRecognize.value)
-    return
-  rp.status = 'listening'
-  try {
-    const transcript = await listenOnce()
-    rp.transcript = transcript
-    rp.score = scoreAnswer(transcript, step.accept)
-    progress.recordSpeaking(rp.score)
-    rp.status = 'result'
-  }
-  catch {
-    rp.status = 'error'
-  }
-}
 
 // Self-grade: record an honest one-tap rating and move straight on.
 function selfGrade(got: boolean) {
@@ -75,20 +43,12 @@ function selfGrade(got: boolean) {
   nextRoleplay()
 }
 
-const rpFeedback = computed(() => {
-  if (rp.score >= 0.85)
-    return { label: '¡Perfecto!', tone: 'good' as const }
-  if (rp.score >= 0.6)
-    return { label: 'Casi — close!', tone: 'ok' as const }
-  return { label: 'Keep practicing', tone: 'low' as const }
-})
-
 function nextRoleplay() {
   if (!scenario.value)
     return
   if (rpIndex.value < scenario.value.roleplay.length - 1) {
     rpIndex.value += 1
-    resetRp()
+    rp.revealed = false
   }
   else {
     phase.value = 'listening'
@@ -218,69 +178,21 @@ function finish() {
         </div>
 
         <div class="border-t border-[var(--color-line)] pt-4">
-          <!-- recognition path -->
-          <template v-if="canRecognize">
-            <button
-              v-if="rp.status === 'idle' || rp.status === 'error'"
-              class="btn btn-primary w-full"
-              @click="record"
-            >
-              <Mic class="size-4" /> Tap and say your answer
-            </button>
-            <p v-if="rp.status === 'listening'" class="py-2 text-center text-[var(--color-clay)] animate-pulse">
-              Listening… speak now
-            </p>
-            <p v-if="rp.status === 'error'" class="mt-2 text-center text-sm text-[var(--color-muted)]">
-              Didn't catch that — try again.
-            </p>
-          </template>
-
-          <!-- self-grade (default): say it aloud, reveal, one-tap rating -->
-          <template v-else>
-            <button v-if="!rp.revealed" class="btn btn-primary w-full" @click="rp.revealed = true">
-              Say it aloud, then show the answer
-            </button>
-            <div v-else class="space-y-3">
-              <p class="text-center text-lg font-medium">{{ currentStep.accept[0] }}</p>
-              <div class="flex justify-center">
-                <SpeakButton :text="currentStep.accept[0]" label="Hear it" />
-              </div>
-              <div class="flex gap-2">
-                <button class="btn btn-ghost flex-1" @click="selfGrade(false)">
-                  <X class="size-4" /> Tricky
-                </button>
-                <button class="btn btn-primary flex-1" @click="selfGrade(true)">
-                  <Check class="size-4" /> Got it
-                </button>
-              </div>
-            </div>
-          </template>
-
-          <!-- result -->
-          <div v-if="rp.status === 'result'" class="space-y-3">
-            <p
-              class="text-center font-medium"
-              :class="{
-                'text-[var(--color-sage)]': rpFeedback.tone === 'good',
-                'text-[var(--color-clay)]': rpFeedback.tone === 'ok',
-                'text-[var(--color-muted)]': rpFeedback.tone === 'low',
-              }"
-            >
-              {{ rpFeedback.label }}
-            </p>
-            <p v-if="rp.transcript" class="text-center text-sm text-[var(--color-ink-soft)]">
-              You said: “{{ rp.transcript }}”
-            </p>
-            <p class="text-center text-sm">
-              Model answer: <span class="font-medium">{{ currentStep.accept[0] }}</span>
-            </p>
-            <div class="flex justify-center gap-2">
+          <!-- say it aloud, reveal, one-tap self-grade (no microphone) -->
+          <button v-if="!rp.revealed" class="btn btn-primary w-full" @click="rp.revealed = true">
+            Say it aloud, then show the answer
+          </button>
+          <div v-else class="space-y-3">
+            <p class="text-center text-lg font-medium">{{ currentStep.accept[0] }}</p>
+            <div class="flex justify-center">
               <SpeakButton :text="currentStep.accept[0]" label="Hear it" />
-              <button class="btn btn-ghost" @click="resetRp">
-                <RotateCcw class="size-4" /> Retry
+            </div>
+            <div class="flex gap-2">
+              <button class="btn btn-ghost flex-1" @click="selfGrade(false)">
+                <X class="size-4" /> Tricky
               </button>
-              <button class="btn btn-primary" @click="nextRoleplay">
-                Next <ArrowRight class="size-4" />
+              <button class="btn btn-primary flex-1" @click="selfGrade(true)">
+                <Check class="size-4" /> Got it
               </button>
             </div>
           </div>

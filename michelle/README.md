@@ -80,15 +80,7 @@ The whole app is pre-built into one file you can just open:
 2. Open it with the browser. On Android Chrome you can open it from Downloads directly; on iPhone, open via the Files app → it launches in your browser.
 3. In Chrome/Safari you can then *Add to Home Screen* for a one-tap icon.
 
-> **Speaking practice is fullest in Chrome/Edge.** Text-to-speech (listening, shadowing) works everywhere, including from a double-clicked file. Speech *recognition* (scoring what you say) is **blocked by browsers on `file://` pages** — so when you open the file directly, speaking automatically falls back to "say it aloud, reveal, self-grade" (nothing breaks).
->
-> To enable real spoken-answer scoring, serve the file over `localhost` and open it in Chrome/Edge. From the folder containing `michelle.html`:
->
-> ```bash
-> python3 -m http.server 8000        # then open http://localhost:8000/michelle.html
-> # or, with Node:
-> npx serve                          # then open the http://localhost link it prints
-> ```
+> **Speaking is self-graded — no microphone required.** On every speaking turn you say it out loud, tap "show the answer", hear the native audio, and tap how it went (Got it / Tricky). This works identically whether you double-click the file or serve it. Text-to-speech (listening, shadowing, "Hear it") works everywhere; it's fullest in Chrome/Edge.
 
 ### Does my progress sync between phone and desktop?
 **No — and that's normal.** Browser storage (localStorage/IndexedDB) is per-device and per-browser-profile; it is *not* synced by Chrome Sync or your Google account. On each device it persists across sessions indefinitely. To move progress, use **Settings → Export backup** on one device and **Import backup** on the other (a small JSON file).

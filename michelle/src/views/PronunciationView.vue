@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { Check, Mic, Volume2 } from 'lucide-vue-next'
-import { reactive, ref } from 'vue'
+import { Volume2 } from 'lucide-vue-next'
 import { sounds } from '@/content/pronunciation'
-import { listenOnce, recognitionSupported, scoreAnswer, speak, ttsSupported } from '@/lib/speech'
+import { speak, ttsSupported } from '@/lib/speech'
 import { useSettings } from '@/stores/settings'
 
 const settings = useSettings()
@@ -11,27 +10,6 @@ const supported = ttsSupported()
 function say(text: string, slow = false) {
   if (supported)
     speak(text, slow ? settings.slowRate : settings.speechRate)
-}
-
-// Optional active practice: say the word, get a score, where the browser allows.
-const canRecognize = ref(recognitionSupported() && settings.useRecognition)
-const listeningKey = ref('')
-const results = reactive<Record<string, number>>({})
-
-async function practice(es: string) {
-  if (!canRecognize.value || listeningKey.value)
-    return
-  listeningKey.value = es
-  try {
-    const heard = await listenOnce()
-    results[es] = scoreAnswer(heard, [es])
-  }
-  catch {
-    // ignore — recognition unavailable this attempt
-  }
-  finally {
-    listeningKey.value = ''
-  }
 }
 </script>
 
@@ -53,27 +31,16 @@ async function practice(es: string) {
       <p class="text-sm text-[var(--color-ink-soft)]">{{ s.tip }}</p>
 
       <div class="flex flex-wrap gap-2 pt-1">
-        <div
+        <button
           v-for="ex in s.examples"
           :key="ex.es"
-          class="flex items-center overflow-hidden rounded-full border border-[var(--color-line)]"
-          :class="results[ex.es] >= 0.6 ? 'border-[var(--color-sage)]' : ''"
+          class="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-sm hover:bg-[var(--color-paper-2)]"
+          :title="ex.en"
+          @click="say(ex.es)"
         >
-          <button class="px-3 py-1.5 text-sm hover:bg-[var(--color-paper-2)]" :title="ex.en" @click="say(ex.es)">
-            {{ ex.es }}
-            <span class="ml-1 text-[var(--color-muted)]">· {{ ex.en }}</span>
-          </button>
-          <button
-            v-if="canRecognize"
-            class="border-l border-[var(--color-line)] px-2 py-1.5 hover:bg-[var(--color-paper-2)]"
-            :class="{ 'animate-pulse text-[var(--color-clay)]': listeningKey === ex.es }"
-            :title="`Say “${ex.es}” to check your pronunciation`"
-            @click="practice(ex.es)"
-          >
-            <Check v-if="results[ex.es] >= 0.6" class="size-3.5 text-[var(--color-sage)]" />
-            <Mic v-else class="size-3.5" />
-          </button>
-        </div>
+          {{ ex.es }}
+          <span class="ml-1 text-[var(--color-muted)]">· {{ ex.en }}</span>
+        </button>
       </div>
 
       <div v-if="s.pairs?.length" class="space-y-2 border-t border-[var(--color-line)] pt-3">
