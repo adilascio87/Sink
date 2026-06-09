@@ -10,7 +10,9 @@ interface SettingsState {
 
 const DEFAULTS: SettingsState = {
   speechRate: 0.9,
-  useRecognition: true,
+  // Off by default: speaking is self-graded with a tap (no mic wait). Turn on
+  // in Settings when running over localhost/https for spoken-answer scoring.
+  useRecognition: false,
   showEnglish: true,
 }
 

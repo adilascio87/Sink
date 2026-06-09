@@ -75,11 +75,13 @@ async function record() {
   }
 }
 
-function selfGrade(got: boolean) {
-  score.value = got ? 1 : 0.4
-  progress.recordSpeaking(score.value)
+function showAnswer() {
   revealed.value = true
-  status.value = 'result'
+}
+
+function gradeNext(got: boolean) {
+  progress.recordSpeaking(got ? 1 : 0.4)
+  next()
 }
 
 function restart() {
@@ -155,19 +157,25 @@ function restart() {
           </button>
           <p v-else class="py-2 text-center text-[var(--color-clay)] animate-pulse">Listening… speak now</p>
         </template>
-        <div v-else class="flex gap-2">
-          <button class="btn btn-ghost flex-1" @click="selfGrade(false)">Reveal</button>
-          <button class="btn btn-primary flex-1" @click="selfGrade(true)">I said it</button>
-        </div>
+        <button v-else class="btn btn-primary w-full" @click="showAnswer">
+          Say it aloud, then show the answer
+        </button>
       </template>
 
       <div v-else class="space-y-3 border-t border-[var(--color-line)] pt-4">
         <p v-if="transcript" class="text-center text-sm text-[var(--color-ink-soft)]">You said: “{{ transcript }}”</p>
         <p v-if="status === 'result' && transcript" class="text-center text-sm font-medium">{{ feedback }}</p>
         <p class="text-center text-lg font-medium">{{ line.es }}</p>
-        <div class="flex justify-center gap-2">
+        <div class="flex justify-center">
           <SpeakButton :text="line.es" label="Hear it" />
+        </div>
+        <!-- recognition: just continue; self-grade: one-tap rating -->
+        <div v-if="status === 'result'" class="flex justify-center">
           <button class="btn btn-primary" @click="next">Next <ArrowRight class="size-4" /></button>
+        </div>
+        <div v-else class="flex gap-2">
+          <button class="btn btn-ghost flex-1" @click="gradeNext(false)">Tricky</button>
+          <button class="btn btn-primary flex-1" @click="gradeNext(true)">Got it <ArrowRight class="size-4" /></button>
         </div>
       </div>
     </section>

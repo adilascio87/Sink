@@ -69,11 +69,10 @@ async function record() {
   }
 }
 
-// Fallback when speech recognition is unavailable: reveal + honest self-grade.
+// Self-grade: record an honest one-tap rating and move straight on.
 function selfGrade(got: boolean) {
-  rp.score = got ? 1 : 0.4
-  progress.recordSpeaking(rp.score)
-  rp.status = 'result'
+  progress.recordSpeaking(got ? 1 : 0.4)
+  nextRoleplay()
 }
 
 const rpFeedback = computed(() => {
@@ -236,19 +235,22 @@ function finish() {
             </p>
           </template>
 
-          <!-- self-grade fallback -->
+          <!-- self-grade (default): say it aloud, reveal, one-tap rating -->
           <template v-else>
-            <button v-if="!rp.revealed" class="btn btn-ghost w-full" @click="rp.revealed = true">
-              Say it aloud, then reveal the answer
+            <button v-if="!rp.revealed" class="btn btn-primary w-full" @click="rp.revealed = true">
+              Say it aloud, then show the answer
             </button>
-            <div v-else-if="rp.status !== 'result'" class="space-y-3">
-              <p class="text-center text-lg">{{ currentStep.accept[0] }}</p>
+            <div v-else class="space-y-3">
+              <p class="text-center text-lg font-medium">{{ currentStep.accept[0] }}</p>
+              <div class="flex justify-center">
+                <SpeakButton :text="currentStep.accept[0]" label="Hear it" />
+              </div>
               <div class="flex gap-2">
                 <button class="btn btn-ghost flex-1" @click="selfGrade(false)">
-                  <X class="size-4" /> Not yet
+                  <X class="size-4" /> Tricky
                 </button>
                 <button class="btn btn-primary flex-1" @click="selfGrade(true)">
-                  <Check class="size-4" /> I said it
+                  <Check class="size-4" /> Got it
                 </button>
               </div>
             </div>
